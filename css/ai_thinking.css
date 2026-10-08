@@ -1,0 +1,329 @@
+/*
+ * AI thinking loader — reusable "the AI is working" graphic.
+ * Markup comes from the `ai_thinking` macro in templates/_ai_thinking.html.
+ * Colours come from app-tokens.css so it follows light / dark mode.
+ */
+
+.ai-think {
+    --ai-think-size: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
+    width: 100%;
+    padding: 1.5rem 1rem;
+    color: var(--color-fg);
+}
+.ai-think--sm { --ai-think-size: 64px; gap: 0.75rem; padding: 0.75rem; }
+.ai-think--lg { --ai-think-size: 168px; gap: 1.5rem; }
+
+/* ── Stage: halo, ring, orbits, orb, sparkles ── */
+.ai-think__stage {
+    position: relative;
+    width: var(--ai-think-size);
+    height: var(--ai-think-size);
+    flex-shrink: 0;
+}
+.ai-think__stage > * { position: absolute; }
+
+.ai-think__halo {
+    inset: -45%;
+    background: var(--gradient-orb);
+    filter: blur(22px);
+    opacity: 0.85;
+    animation: ai-think-breathe 4s ease-in-out infinite;
+}
+
+.ai-think__ring {
+    inset: -6%;
+    border-radius: 50%;
+    padding: 2px;
+    background: conic-gradient(from 0deg, transparent 0 10%, #4f7bff, #7c5cff, #d946ef, #fb7185, transparent 90% 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+            mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    animation: ai-think-spin 2.6s linear infinite;
+}
+
+.ai-think__orbit {
+    inset: -18%;
+    border-radius: 50%;
+    animation: ai-think-spin 6s linear infinite;
+}
+.ai-think__orbit--reverse {
+    inset: -2%;
+    animation-duration: 4.2s;
+    animation-direction: reverse;
+}
+.ai-think__orbit::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 9%;
+    height: 9%;
+    min-width: 5px;
+    min-height: 5px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    box-shadow: 0 0 10px 2px rgba(124, 92, 255, 0.85), 0 0 18px 4px rgba(217, 70, 239, 0.45);
+}
+.ai-think__orbit--reverse::before {
+    width: 6%;
+    height: 6%;
+    min-width: 4px;
+    min-height: 4px;
+    box-shadow: 0 0 8px 2px rgba(79, 123, 255, 0.85);
+}
+
+.ai-think__orb {
+    inset: 12%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-brand);
+    background-size: 220% 220%;
+    border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+    box-shadow:
+        inset 0 2px 10px rgba(255, 255, 255, 0.45),
+        inset 0 -8px 18px rgba(76, 29, 149, 0.35),
+        0 12px 32px -10px rgba(124, 92, 255, 0.7);
+    animation:
+        ai-think-morph 7s ease-in-out infinite,
+        ai-think-flow 5s ease-in-out infinite,
+        ai-think-float 3.2s ease-in-out infinite;
+}
+.ai-think__orb::after {
+    content: "";
+    position: absolute;
+    top: 14%;
+    left: 20%;
+    width: 34%;
+    height: 22%;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(255, 255, 255, 0.7), transparent);
+    transform: rotate(-25deg);
+}
+.ai-think__icon {
+    width: 42%;
+    height: 42%;
+    color: #fff;
+    filter: drop-shadow(0 2px 6px rgba(76, 29, 149, 0.45));
+    animation: ai-think-twinkle 2.4s ease-in-out infinite;
+}
+
+.ai-think__spark {
+    width: 14%;
+    height: 14%;
+    color: #c4b5fd;
+    opacity: 0;
+    animation: ai-think-spark 2.8s ease-in-out infinite;
+}
+.ai-think__spark--1 { top: -6%;  right: -4%; animation-delay: 0s; }
+.ai-think__spark--2 { bottom: 2%; left: -10%; width: 10%; height: 10%; color: #f0abfc; animation-delay: 0.9s; }
+.ai-think__spark--3 { top: 30%;  left: -16%; width: 8%;  height: 8%;  color: #93c5fd; animation-delay: 1.7s; }
+.ai-think__spark--4 { bottom: -8%; right: 8%; width: 9%; height: 9%;  color: #fda4af; animation-delay: 2.2s; }
+
+/* ── Copy ── */
+.ai-think__copy { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; max-width: 28rem; }
+
+.ai-think__title {
+    font-family: var(--app-heading-font);
+    letter-spacing: var(--app-heading-tracking);
+    font-size: 1.125rem;
+    font-weight: 650;
+    line-height: 1.3;
+    background: var(--gradient-text);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: ai-think-flow 4s ease-in-out infinite;
+}
+.ai-think--sm .ai-think__title { font-size: 0.875rem; }
+.ai-think--lg .ai-think__title { font-size: 1.375rem; }
+
+.ai-think__subtitle {
+    font-size: 0.8125rem;
+    color: var(--color-fg-muted);
+}
+
+.ai-think__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--color-fg-muted);
+}
+.ai-think__messages { display: inline-grid; }
+.ai-think__message {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(6px);
+    filter: blur(3px);
+    transition: opacity 0.45s ease, transform 0.45s ease, filter 0.45s ease;
+    white-space: nowrap;
+}
+.ai-think__message.is-active { opacity: 1; transform: none; filter: none; }
+
+.ai-think__dots { display: inline-flex; gap: 3px; }
+.ai-think__dots span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gradient-brand);
+    background-size: 400% 100%;
+    animation: ai-think-bounce 1.2s ease-in-out infinite;
+}
+.ai-think__dots span:nth-child(1) { background-position: 0% 0; }
+.ai-think__dots span:nth-child(2) { background-position: 50% 0; animation-delay: 0.15s; }
+.ai-think__dots span:nth-child(3) { background-position: 100% 0; animation-delay: 0.3s; }
+
+/* ── Skeleton "document being written" ── */
+.ai-think__sheet {
+    width: min(100%, 22rem);
+    padding: 1rem 1.1rem;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    background: var(--card-bg);
+    box-shadow: var(--card-highlight), var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+.ai-think__line {
+    height: 0.55rem;
+    border-radius: 999px;
+    background:
+        linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.55) 50%, transparent 100%) no-repeat,
+        var(--gradient-brand-soft);
+    background-size: 40% 100%, 100% 100%;
+    background-position: -60% 0, 0 0;
+    transform-origin: left center;
+    animation: ai-think-write 3.6s ease-in-out infinite, ai-think-sheen 1.8s linear infinite;
+}
+html.dark .ai-think__line {
+    background-image:
+        linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 50%, transparent 100%),
+        var(--gradient-brand-soft);
+}
+.ai-think__line--head { height: 0.8rem; width: 55%; }
+.ai-think__line:nth-child(2) { width: 100%; animation-delay: 0.25s, 0s; }
+.ai-think__line:nth-child(3) { width: 88%;  animation-delay: 0.5s, 0.2s; }
+.ai-think__line:nth-child(4) { width: 94%;  animation-delay: 0.75s, 0.4s; }
+.ai-think__line:nth-child(5) { width: 62%;  animation-delay: 1s, 0.6s; }
+
+/* ── Skeleton "deck being built" ── */
+.ai-think__deck {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    width: min(100%, 26rem);
+}
+.ai-think__slide {
+    flex: 1 1 0;
+    aspect-ratio: 16 / 10;
+    padding: 0.6rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-border);
+    background: var(--card-bg);
+    box-shadow: var(--card-highlight), var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    opacity: 0;
+    animation: ai-think-deal 4.5s ease-in-out infinite;
+}
+.ai-think__slide:nth-child(2) { animation-delay: 0.5s; }
+.ai-think__slide:nth-child(3) { animation-delay: 1s; }
+.ai-think__slide .ai-think__line { height: 0.35rem; width: 70%; }
+.ai-think__slide .ai-think__line--head { height: 0.5rem; width: 50%; }
+.ai-think__slide-media {
+    flex: 1;
+    border-radius: 0.45rem;
+    background: var(--gradient-brand-soft);
+    background-size: 200% 200%;
+    animation: ai-think-flow 3s ease-in-out infinite;
+}
+
+/* ── Progress + caption ── */
+.ai-think__progress {
+    width: min(100%, 22rem);
+    height: 6px;
+    border-radius: 999px;
+    background: var(--color-surface-2);
+    box-shadow: inset 0 0 0 1px var(--color-border);
+    overflow: hidden;
+}
+.ai-think__progress-bar {
+    height: 100%;
+    border-radius: inherit;
+    background: var(--gradient-brand);
+    background-size: 200% 100%;
+    box-shadow: 0 0 12px rgba(124, 92, 255, 0.6);
+    transition: width 0.6s ease-out;
+    animation: ai-think-flow 2.4s linear infinite;
+}
+.ai-think__caption {
+    font-size: 0.75rem;
+    color: var(--color-fg-subtle);
+}
+
+/* ── Keyframes ── */
+@keyframes ai-think-deal {
+    0%       { opacity: 0; transform: translateY(10px) scale(0.94); }
+    15%, 75% { opacity: 1; transform: none; }
+    100%     { opacity: 0; transform: translateY(-6px) scale(0.98); }
+}
+@keyframes ai-think-spin { to { transform: rotate(360deg); } }
+@keyframes ai-think-breathe {
+    0%, 100% { transform: scale(0.92); opacity: 0.7; }
+    50%      { transform: scale(1.08); opacity: 1; }
+}
+@keyframes ai-think-morph {
+    0%, 100% { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; }
+    33%      { border-radius: 63% 37% 45% 55% / 55% 62% 38% 45%; }
+    66%      { border-radius: 38% 62% 56% 44% / 63% 39% 61% 37%; }
+}
+@keyframes ai-think-flow {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+@keyframes ai-think-float {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 -5%; }
+}
+@keyframes ai-think-twinkle {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    50%      { transform: scale(0.86) rotate(12deg); opacity: 0.85; }
+}
+@keyframes ai-think-spark {
+    0%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
+    40%      { opacity: 1; transform: scale(1) rotate(45deg); }
+    70%      { opacity: 0; transform: scale(0.5) rotate(90deg); }
+}
+@keyframes ai-think-bounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.45; }
+    40%           { transform: translateY(-4px); opacity: 1; }
+}
+@keyframes ai-think-write {
+    0%       { transform: scaleX(0.15); opacity: 0.4; }
+    35%, 80% { transform: scaleX(1); opacity: 1; }
+    100%     { transform: scaleX(1); opacity: 0.4; }
+}
+@keyframes ai-think-sheen {
+    to { background-position: 160% 0, 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ai-think *,
+    .ai-think *::before,
+    .ai-think *::after {
+        animation-duration: 0s !important;
+        animation-iteration-count: 1 !important;
+    }
+    .ai-think__spark,
+    .ai-think__slide { opacity: 0.8; }
+    .ai-think__message { transition: opacity 0.2s ease; transform: none; filter: none; }
+}

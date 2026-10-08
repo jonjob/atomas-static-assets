@@ -1,0 +1,184 @@
+/* Display-only: global dark-mode ergonomics + print overrides. Tokens: app-tokens.css (loaded before). */
+
+/* ---- Dark mode: header wordmark in violet. The PNG is solid orange, so it is used as a mask over a
+   violet fill and its own pixels are pushed out of view with object-position. ---- */
+html.dark .app-logo {
+    background-color: #c4b5fd;
+    -webkit-mask: url("../images/atomas-cap-orig.png") center / contain no-repeat;
+    mask: url("../images/atomas-cap-orig.png") center / contain no-repeat;
+    object-position: -99999px 0;
+}
+
+/* ---- Dark mode: form controls (typed text + dark field surfaces) ---- */
+html.dark textarea,
+html.dark select,
+html.dark input[list],
+html.dark input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="hidden"]):not([type="image"]):not([type="color"]) {
+    background-color: var(--color-input-bg);
+    color: var(--color-input-fg);
+    caret-color: var(--color-input-fg);
+    border-color: var(--color-border);
+}
+
+html.dark textarea::placeholder,
+html.dark input::placeholder {
+    color: var(--color-fg-muted);
+    opacity: 1;
+}
+
+html.dark textarea:focus,
+html.dark select:focus,
+html.dark input[list]:focus,
+html.dark input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="hidden"]):not([type="image"]):not([type="color"]):focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 1px var(--color-ring);
+}
+
+/* Autofill: avoid flashing light yellow fields in dark mode */
+html.dark input:-webkit-autofill,
+html.dark textarea:-webkit-autofill,
+html.dark select:-webkit-autofill {
+    -webkit-text-fill-color: var(--color-input-fg);
+    caret-color: var(--color-input-fg);
+    box-shadow: 0 0 0 1000px var(--color-input-bg) inset;
+    transition: background-color 99999s ease-out;
+}
+
+html.dark [contenteditable="true"],
+html.dark [contenteditable=""] {
+    background-color: var(--color-input-bg);
+    color: var(--color-input-fg);
+    caret-color: var(--color-input-fg);
+}
+
+/* Legacy slate/gray/white remaps for dark mode live in input.css (safety-net block). */
+
+/*
+ * Staff management keeps light pastel panels (pending lists, table headers, chips).
+ * Dark mode already lifts slate/gray text, so those panels become light text on white.
+ */
+html.dark .staff-management-root .bg-slate-50,
+html.dark .staff-management-root .bg-slate-100,
+html.dark .staff-management-root .bg-gray-50,
+html.dark .staff-management-root .bg-gray-100 {
+    background-color: color-mix(in srgb, var(--color-fg) 7%, var(--color-surface)) !important;
+}
+
+html.dark .staff-management-root .bg-slate-200,
+html.dark .staff-management-root .bg-gray-200,
+html.dark .staff-management-root .bg-orange-100,
+html.dark .staff-management-root .bg-orange-200,
+html.dark .staff-management-root .bg-amber-100,
+html.dark .staff-management-root .bg-blue-100,
+html.dark .staff-management-root .bg-red-100,
+html.dark .staff-management-root .bg-green-100,
+html.dark .staff-management-root .bg-indigo-100,
+html.dark .staff-management-root .bg-purple-100,
+html.dark .staff-management-root .bg-yellow-100,
+html.dark .staff-management-root .bg-yellow-200 {
+    background-color: color-mix(in srgb, var(--color-fg) 14%, var(--color-surface)) !important;
+}
+
+html.dark .staff-management-root .bg-orange-50,
+html.dark .staff-management-root .bg-amber-50,
+html.dark .staff-management-root .bg-blue-50,
+html.dark .staff-management-root .bg-red-50,
+html.dark .staff-management-root .bg-yellow-50,
+html.dark .staff-management-root .bg-green-50 {
+    background-color: color-mix(in srgb, var(--color-fg) 9%, var(--color-surface)) !important;
+    color: var(--color-fg);
+}
+
+html.dark .staff-management-root .hover\:bg-slate-50\/50:hover,
+html.dark .staff-management-root .hover\:bg-slate-50:hover,
+html.dark .staff-management-root .hover\:bg-orange-50:hover,
+html.dark .staff-management-root .hover\:bg-gray-50:hover {
+    background-color: color-mix(in srgb, var(--color-fg) 12%, var(--color-surface)) !important;
+}
+
+html.dark .staff-management-root .hover\:bg-gray-100:hover,
+html.dark .staff-management-root .hover\:bg-gray-200:hover,
+html.dark .staff-management-root .hover\:bg-red-200:hover {
+    background-color: color-mix(in srgb, var(--color-fg) 20%, var(--color-surface)) !important;
+}
+
+html.dark .staff-management-root .bg-gradient-to-br {
+    background-image: none !important;
+    background-color: var(--color-surface) !important;
+}
+
+html.dark .staff-management-root .text-orange-600,
+html.dark .staff-management-root .text-orange-700,
+html.dark .staff-management-root .text-orange-800,
+html.dark .staff-management-root .text-orange-900,
+html.dark .staff-management-root .text-amber-900,
+html.dark .staff-management-root .text-yellow-700,
+html.dark .staff-management-root .text-yellow-800 {
+    color: var(--color-primary) !important;
+}
+
+html.dark .staff-management-root .text-blue-600,
+html.dark .staff-management-root .text-blue-700,
+html.dark .staff-management-root .text-blue-800,
+html.dark .staff-management-root .text-indigo-700,
+html.dark .staff-management-root .text-indigo-800 {
+    color: var(--color-link) !important;
+}
+
+html.dark .staff-management-root .text-red-600,
+html.dark .staff-management-root .text-red-700,
+html.dark .staff-management-root .text-red-800 {
+    color: var(--color-danger) !important;
+}
+
+html.dark .staff-management-root .text-green-600,
+html.dark .staff-management-root .text-green-700,
+html.dark .staff-management-root .text-green-800 {
+    color: color-mix(in srgb, #4ade80 72%, var(--color-fg)) !important;
+}
+
+html.dark .staff-management-root .text-purple-700,
+html.dark .staff-management-root .text-purple-800 {
+    color: color-mix(in srgb, #d8b4fe 72%, var(--color-fg)) !important;
+}
+
+/* Focus: crisp accent ring on fields in both modes */
+html.dark textarea:focus,
+html.dark select:focus,
+html.dark input[list]:focus,
+html.dark input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="hidden"]):not([type="image"]):not([type="color"]):focus {
+    border-color: var(--color-accent-2);
+    box-shadow: 0 0 0 3px var(--color-ring);
+}
+
+html:not(.dark) textarea:focus-visible,
+html:not(.dark) select:focus-visible,
+html:not(.dark) input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):focus-visible {
+    outline: none;
+    border-color: var(--color-accent-2);
+    box-shadow: 0 0 0 3px var(--color-ring);
+}
+
+@media print {
+    html {
+        color-scheme: light !important;
+    }
+    html.dark {
+        color-scheme: light !important;
+    }
+    body {
+        background: #fff !important;
+        color: #111 !important;
+    }
+    textarea,
+    select,
+    input[list],
+    input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="hidden"]):not([type="image"]):not([type="color"]) {
+        background: #fff !important;
+        color: #111 !important;
+        border-color: #ccc !important;
+        box-shadow: none !important;
+        -webkit-text-fill-color: #111 !important;
+    }
+}

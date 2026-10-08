@@ -1,0 +1,1277 @@
+
+    /* Neutral app shell + persona tokens — neutrals alias global app-tokens.css (html.dark swaps :root). */
+    .canvas-workspace-themed {
+        --app-canvas-bg: var(--color-page-bg);
+        --app-surface: var(--color-surface);
+        --app-border: var(--color-border);
+        --app-text: var(--color-fg);
+        --canvas-core: #4f46e5;
+        --canvas-accent: #64748b;
+        --canvas-surface: var(--color-page-bg);
+        /* Send hover + quick chips: fixed accent (persona --canvas-core may be red/blue/teal from DB) */
+        --canvas-composer-accent: var(--color-accent-2);
+    }
+    .dark .canvas-workspace-shell {
+        background: transparent;
+    }
+    /* Notebook canvas (dark): let scroll shell stay transparent — surfaces are inner cards only */
+    .dark .canvas-workspace-themed .canvas-notebook-root > .overflow-y-auto {
+        background: transparent !important;
+    }
+    .dark .canvas-workspace-themed .eal-lesson-wizard-root .eal-lesson-wizard-scroll,
+    .dark .canvas-workspace-themed .online-lesson-wizard-root .online-lesson-wizard-scroll {
+        background: transparent !important;
+        box-shadow: none !important;
+        --tw-ring-shadow: 0 0 #0000 !important;
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .eal-lesson-wizard-root div.flex-shrink-0[class*="border-orange-100"][class*="bg-white"],
+    .dark .canvas-workspace-themed .online-lesson-wizard-root div.flex-shrink-0[class*="border-orange-100"][class*="bg-white"] {
+        background-color: transparent !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-wizard-root [class*="bg-slate-50/90"],
+    .dark .canvas-workspace-themed .eal-lesson-wizard-root [class*="bg-slate-50/90"],
+    .dark .canvas-workspace-themed .online-lesson-wizard-root [class*="bg-slate-50/90"],
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="bg-slate-50/90"] {
+        background-color: transparent !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-wizard-root .lesson-plan-include-box {
+        background-color: color-mix(in srgb, var(--color-surface) 88%, transparent) !important;
+        border-color: color-mix(in srgb, var(--color-border) 90%, transparent) !important;
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 60%, transparent);
+    }
+    .dark .canvas-workspace-themed .lesson-plan-wizard-root .lesson-plan-include-box p,
+    .dark .canvas-workspace-themed .lesson-plan-wizard-root .lesson-plan-include-box label,
+    .dark .canvas-workspace-themed .lesson-plan-wizard-root .lesson-plan-include-box span {
+        color: var(--color-fg) !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-wizard-root .lesson-plan-include-box strong {
+        color: #ffffff !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-wizard-root thead.bg-slate-50,
+    .dark .canvas-workspace-themed .eal-lesson-wizard-root thead.bg-slate-50,
+    .dark .canvas-workspace-themed .online-lesson-wizard-root thead.bg-slate-50 {
+        background-color: transparent !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-wizard-root button[class*="bg-slate-50"],
+    .dark .canvas-workspace-themed .eal-lesson-wizard-root button[class*="bg-slate-50"],
+    .dark .canvas-workspace-themed .online-lesson-wizard-root button[class*="bg-slate-50"],
+    .dark .canvas-workspace-themed .quiz-wizard-root button[class*="bg-slate-50"] {
+        background-color: transparent !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-wizard-root button[class*="bg-slate-50"]:hover,
+    .dark .canvas-workspace-themed .eal-lesson-wizard-root button[class*="bg-slate-50"]:hover,
+    .dark .canvas-workspace-themed .online-lesson-wizard-root button[class*="bg-slate-50"]:hover,
+    .dark .canvas-workspace-themed .quiz-wizard-root button[class*="bg-slate-50"]:hover {
+        background-color: color-mix(in srgb, var(--color-border) 35%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-wizard-root span.inline-flex.h-7.w-7.rounded-full[class*="bg-slate-100"],
+    .dark .canvas-workspace-themed .eal-lesson-wizard-root span.inline-flex.h-7.w-7.rounded-full[class*="bg-slate-100"],
+    .dark .canvas-workspace-themed .online-lesson-wizard-root span.inline-flex.h-7.w-7.rounded-full[class*="bg-slate-100"],
+    .dark .canvas-workspace-themed .quiz-wizard-root span.inline-flex.h-7.w-7.rounded-full[class*="bg-slate-100"] {
+        background-color: transparent !important;
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 80%, transparent);
+    }
+    /* Quiz wizard (dark): indigo accents + readable text */
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="border-indigo-100"],
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="border-indigo-200"] {
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="text-slate-900"],
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="text-slate-800"] {
+        color: var(--color-fg) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="text-slate-700"],
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="text-slate-600"],
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="text-slate-500"] {
+        color: var(--color-fg-muted) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="bg-indigo-50"] {
+        background-color: color-mix(in srgb, rgb(99 102 241) 14%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="text-indigo-800"],
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="text-indigo-900"] {
+        color: rgb(199 210 254) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-wizard-root button[class*="bg-indigo-50"] {
+        background-color: color-mix(in srgb, rgb(99 102 241) 14%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-wizard-root .quiz-url-fetch-btn:not(:disabled) {
+        opacity: 1 !important;
+        background-color: #4f46e5 !important;
+        color: #ffffff !important;
+    }
+    .dark .canvas-workspace-themed .quiz-wizard-root .quiz-url-fetch-btn:not(:disabled):hover {
+        background-color: #4338ca !important;
+    }
+    .dark .canvas-workspace-themed .quiz-wizard-root .quiz-url-fetch-btn:disabled {
+        opacity: 0.45 !important;
+        cursor: not-allowed;
+    }
+    .dark .canvas-workspace-themed .quiz-wizard-root input[type="text"],
+    .dark .canvas-workspace-themed .quiz-wizard-root input[type="url"],
+    .dark .canvas-workspace-themed .quiz-wizard-root input[type="number"],
+    .dark .canvas-workspace-themed .quiz-wizard-root select,
+    .dark .canvas-workspace-themed .quiz-wizard-root textarea {
+        background-color: var(--color-surface) !important;
+        border-color: var(--color-border) !important;
+        color: var(--color-fg) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="border-slate-100"],
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="border-slate-200"],
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="border-slate-300"] {
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-wizard-root span[class*="bg-slate-200"][class*="h-px"] {
+        background-color: color-mix(in srgb, var(--color-border) 70%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="bg-amber-50"] {
+        background-color: color-mix(in srgb, rgb(245 158 11) 12%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-wizard-root [class*="text-amber-800"] {
+        color: rgb(253 230 138) !important;
+    }
+    /* Quiz editor (dark): toolbar, panels, compact view */
+    .dark .canvas-workspace-themed .quiz-center-root [class*="bg-white"],
+    .dark .canvas-workspace-themed .quiz-center-root [class*="bg-slate-50"] {
+        background-color: color-mix(in srgb, var(--color-surface) 92%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-center-root [class*="text-slate-800"],
+    .dark .canvas-workspace-themed .quiz-center-root [class*="text-slate-700"],
+    .dark .canvas-workspace-themed .quiz-center-root [class*="text-slate-600"] {
+        color: var(--color-fg) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-center-root [class*="text-slate-500"],
+    .dark .canvas-workspace-themed .quiz-center-root [class*="text-slate-400"] {
+        color: var(--color-fg-muted) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-center-root [class*="border-slate-200"],
+    .dark .canvas-workspace-themed .quiz-center-root [class*="border-slate-300"] {
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-center-root a[class*="text-indigo-700"] {
+        color: rgb(165 180 252) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-center-root input,
+    .dark .canvas-workspace-themed .quiz-center-root select,
+    .dark .canvas-workspace-themed .quiz-center-root textarea {
+        background-color: var(--color-surface) !important;
+        border-color: var(--color-border) !important;
+        color: var(--color-fg) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-center-root button[class*="bg-slate-50"],
+    .dark .canvas-workspace-themed .quiz-center-root button[class*="bg-slate-100"] {
+        background-color: color-mix(in srgb, var(--color-border) 28%, transparent) !important;
+        color: var(--color-fg) !important;
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-center-root button[class*="bg-slate-50"]:hover,
+    .dark .canvas-workspace-themed .quiz-center-root button[class*="bg-slate-100"]:hover {
+        background-color: color-mix(in srgb, var(--color-border) 42%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-center-root [class*="bg-amber-50"] {
+        background-color: color-mix(in srgb, rgb(245 158 11) 12%, transparent) !important;
+        border-color: color-mix(in srgb, rgb(245 158 11) 35%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-center-root [class*="text-amber-950"] {
+        color: rgb(253 230 138) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-wizard-root .quiz-template-card[class*="bg-white"] {
+        background-color: color-mix(in srgb, var(--color-surface) 92%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .quiz-center-root .fixed[class*="bg-white"] {
+        background-color: var(--color-surface) !important;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.45) !important;
+    }
+    /* Student Work Marking (dark): same “page shows through” treatment */
+    .dark .canvas-workspace-themed .student-work-marking-root {
+        background: transparent !important;
+        background-image: none !important;
+        box-shadow: none !important;
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .student-work-marking-root .bg-sky-50 {
+        background-color: color-mix(in srgb, var(--color-primary) 10%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .student-work-marking-root .shadow-sm.bg-white {
+        background-color: transparent !important;
+        box-shadow: none !important;
+    }
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-feedback-pane {
+        background-color: transparent !important;
+        box-shadow: none !important;
+    }
+    .dark .canvas-workspace-themed .student-work-marking-root div.p-3[class*="bg-slate-50"][class*="rounded-lg"] {
+        background-color: transparent !important;
+    }
+    .dark .canvas-workspace-themed .student-work-marking-root button[class*="bg-slate-200"] {
+        background-color: transparent !important;
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 80%, transparent);
+    }
+    .dark .canvas-workspace-themed .student-work-marking-root button[class*="bg-slate-200"]:hover {
+        background-color: color-mix(in srgb, var(--color-border) 35%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-student-upload-card span[class*="bg-slate-100"] {
+        background-color: transparent !important;
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 75%, transparent);
+    }
+    /* SWM wizard (dark): transparent shell matching other canvas wizard shells */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell {
+        background: transparent !important;
+        background-image: none !important;
+        box-shadow: none !important;
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+    }
+    /* Atomas label */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell .canvas-wizard-atomas-label {
+        color: #a5b4fc;
+    }
+    /* Step panels + white content cards — match canvas-wizard-step-card canvas override */
+    .dark .canvas-workspace-themed .student-work-marking-root .canvas-wizard-step-card {
+        background: transparent !important;
+        box-shadow: none !important;
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+    }
+    /* Text: headings */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell [class*="text-slate-900"],
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell [class*="text-slate-800"] {
+        color: var(--color-fg) !important;
+    }
+    /* Text: secondary / muted */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell [class*="text-slate-700"],
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell [class*="text-slate-600"],
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell [class*="text-slate-500"],
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell [class*="text-slate-400"] {
+        color: var(--color-fg-muted) !important;
+    }
+    /* Stepper inactive circles */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell span.inline-flex.h-7.w-7.rounded-full[class*="bg-slate-100"] {
+        background-color: transparent !important;
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 80%, transparent);
+    }
+    /* bg-slate-50 toolbar, note rows */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell div[class*="bg-slate-50"][class*="rounded"] {
+        background-color: transparent !important;
+    }
+    /* Divider borders */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell [class*="border-slate-100"],
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell [class*="border-slate-200"] {
+        border-color: color-mix(in srgb, var(--color-border) 70%, transparent) !important;
+    }
+    /* bg-slate-200 connector lines in stepper */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell span[class*="bg-slate-200"][class*="h-px"] {
+        background-color: color-mix(in srgb, var(--color-border) 60%, transparent) !important;
+    }
+    /* Group chip buttons (bg-slate-100, hover:bg-slate-200) */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell button[class*="bg-slate-100"],
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell button[class*="border-slate-200"][class*="bg-slate-100"] {
+        background-color: transparent !important;
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 80%, transparent);
+    }
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell button[class*="bg-slate-100"]:hover {
+        background-color: color-mix(in srgb, var(--color-border) 30%, transparent) !important;
+    }
+    /* Status indicator cards: amber / green / blue / red */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell [class*="bg-amber-50"] {
+        background-color: color-mix(in srgb, #f59e0b 12%, transparent) !important;
+        border-color: color-mix(in srgb, #f59e0b 28%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell [class*="bg-green-50"] {
+        background-color: color-mix(in srgb, #22c55e 12%, transparent) !important;
+        border-color: color-mix(in srgb, #22c55e 28%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell [class*="bg-blue-50"] {
+        background-color: color-mix(in srgb, #3b82f6 12%, transparent) !important;
+        border-color: color-mix(in srgb, #3b82f6 28%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell [class*="bg-red-50"] {
+        background-color: color-mix(in srgb, #ef4444 12%, transparent) !important;
+        border-color: color-mix(in srgb, #ef4444 28%, transparent) !important;
+    }
+    /* Student upload cards inside wizard */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell .swm-student-upload-card {
+        background-color: rgba(255,255,255,0.06) !important;
+        border-color: rgba(255,255,255,0.12) !important;
+        box-shadow: none !important;
+    }
+    /* Card name/divider border */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell .swm-student-upload-card [class*="border-slate-100"] {
+        border-color: rgba(255,255,255,0.08) !important;
+    }
+    /* Form inputs and selects */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell input[type="text"],
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell input[type="file"],
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell select {
+        background-color: color-mix(in srgb, var(--color-surface) 55%, transparent) !important;
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+        color: var(--color-fg) !important;
+    }
+    /* Feedback pane */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-wizard-shell .swm-feedback-pane {
+        background-color: color-mix(in srgb, var(--color-surface) 70%, transparent) !important;
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+        box-shadow: none !important;
+    }
+    /* Feedback pane: colored card backgrounds */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-feedback-pane [class*="bg-orange-50"] {
+        background-color: color-mix(in srgb, #818cf8 10%, transparent) !important;
+        border-color: color-mix(in srgb, #818cf8 25%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-feedback-pane [class*="bg-violet-50"] {
+        background-color: color-mix(in srgb, #8b5cf6 10%, transparent) !important;
+        border-color: color-mix(in srgb, #8b5cf6 25%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-feedback-pane [class*="bg-sky-50"] {
+        background-color: color-mix(in srgb, #0ea5e9 10%, transparent) !important;
+        border-color: color-mix(in srgb, #0ea5e9 25%, transparent) !important;
+    }
+    /* Feedback pane: all coloured text → theme foreground */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-feedback-pane [class*="text-orange-"],
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-feedback-pane [class*="text-violet-"],
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-feedback-pane [class*="text-sky-"],
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-feedback-pane [class*="text-red-"],
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-feedback-pane [class*="text-slate-"] {
+        color: var(--color-fg) !important;
+    }
+    /* Feedback pane: mute section h5 headings slightly */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-feedback-pane h5 {
+        color: var(--color-fg-muted) !important;
+    }
+    /* Feedback pane: prose links use theme primary, not browser default blue */
+    .dark .canvas-workspace-themed .student-work-marking-root .swm-feedback-pane .prose a {
+        color: var(--color-primary) !important;
+    }
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose-wrapper {
+        background-color: color-mix(in srgb, var(--color-surface) 90%, transparent);
+        border: 1px solid color-mix(in srgb, var(--color-border) 88%, transparent);
+        border-radius: 0.75rem;
+        padding: 1rem;
+    }
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose {
+        --lp-text: #f8fafc;
+        --lp-muted: #cbd5e1;
+        --lp-border: color-mix(in srgb, var(--color-border) 88%, transparent);
+        --lp-surface: color-mix(in srgb, var(--color-surface) 86%, transparent);
+        color: var(--lp-text) !important;
+    }
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose {
+        --lp-text: #e2e8f0;
+        --lp-muted: #94a3b8;
+        --lp-border: color-mix(in srgb, var(--color-border) 88%, transparent);
+        --lp-accent: #818cf8;
+        --lp-surface: color-mix(in srgb, var(--color-surface) 86%, transparent);
+        color: var(--lp-text) !important;
+    }
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose h1,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose h2,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose h3,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose h4,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose h5,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose h6,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose strong {
+        color: #f8fafc !important;
+    }
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose h2 {
+        border-left-color: #818cf8 !important;
+    }
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose h3,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose h4,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose h5,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose h6,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose p,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose li,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose td,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose blockquote,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose .lesson-plan-image-request-desc {
+        color: var(--lp-text) !important;
+    }
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose code {
+        background: color-mix(in srgb, var(--color-surface) 84%, transparent) !important;
+        border-color: var(--lp-border) !important;
+        color: #e2e8f0 !important;
+    }
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-table-wrap {
+        background: color-mix(in srgb, var(--color-surface) 84%, transparent) !important;
+        border-color: var(--lp-border) !important;
+    }
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose th,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-table-wrap th {
+        background: color-mix(in srgb, var(--color-surface) 68%, var(--color-border)) !important;
+        color: #f8fafc !important;
+    }
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose tbody tr:nth-child(even) td,
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-table-wrap tbody tr:nth-child(even) td {
+        background: color-mix(in srgb, var(--color-surface) 78%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose .lesson-plan-image-request {
+        border-color: color-mix(in srgb, #818cf8 45%, var(--color-border)) !important;
+        background: color-mix(in srgb, #818cf8 10%, var(--color-surface)) !important;
+    }
+    .dark .canvas-workspace-themed #canvas-lesson-plan-content .lesson-plan-prose .lesson-plan-image-request-label {
+        color: #c4ff7a !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace {
+        background-color: color-mix(in srgb, var(--color-surface) 90%, transparent) !important;
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28) !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace > div[class*="bg-slate-50"],
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace > div[class*="bg-white"] {
+        background-color: color-mix(in srgb, var(--color-surface) 86%, transparent) !important;
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace [class*="text-slate-800"],
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace [class*="text-slate-700"],
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace [class*="text-slate-600"] {
+        color: var(--color-fg) !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace [class*="text-slate-500"],
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace [class*="text-slate-400"] {
+        color: var(--color-fg-muted) !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace .lesson-plan-image-action-btn {
+        background-color: color-mix(in srgb, var(--color-surface) 82%, transparent) !important;
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+        color: #f8fafc !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace .lesson-plan-image-action-btn:hover {
+        background-color: color-mix(in srgb, var(--color-border) 30%, transparent) !important;
+        color: #ffffff !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace .lesson-plan-image-action-btn.lesson-plan-image-action-btn--accent {
+        background-color: color-mix(in srgb, #818cf8 12%, var(--color-surface)) !important;
+        border-color: color-mix(in srgb, #818cf8 45%, var(--color-border)) !important;
+        color: #c4ff7a !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace .lesson-plan-image-action-btn.lesson-plan-image-action-btn--accent:hover {
+        background-color: color-mix(in srgb, #818cf8 18%, var(--color-surface)) !important;
+        border-color: color-mix(in srgb, #c4ff7a 55%, var(--color-border)) !important;
+        color: #d9ffb0 !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace button[class*="bg-slate-50"],
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace button[class*="bg-slate-100"],
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace button[class*="bg-slate-200"] {
+        background-color: color-mix(in srgb, var(--color-surface) 82%, transparent) !important;
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+        color: #f8fafc !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace button[class*="bg-slate-50"]:hover,
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace button[class*="bg-slate-100"]:hover,
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace button[class*="bg-slate-200"]:hover {
+        background-color: color-mix(in srgb, var(--color-border) 30%, transparent) !important;
+        color: #ffffff !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace button[class*="bg-orange-50"] {
+        background-color: color-mix(in srgb, #818cf8 10%, var(--color-surface)) !important;
+        border-color: color-mix(in srgb, #818cf8 45%, var(--color-border)) !important;
+        color: #d9ffb0 !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace button[class*="bg-orange-50"]:hover {
+        background-color: color-mix(in srgb, #818cf8 16%, var(--color-surface)) !important;
+        border-color: color-mix(in srgb, #c4ff7a 50%, var(--color-border)) !important;
+        color: #ecffd6 !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace button.text-orange-600 {
+        color: #a5b4fc !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-edit-workspace button.text-orange-600:hover {
+        color: #c7d2fe !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-preview-secondary-btn {
+        background-color: color-mix(in srgb, var(--color-surface) 84%, transparent) !important;
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+        color: #f8fafc !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-preview-secondary-btn:hover {
+        background-color: color-mix(in srgb, var(--color-border) 30%, transparent) !important;
+        color: #ffffff !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-selection-menu {
+        background-color: color-mix(in srgb, var(--color-surface) 92%, transparent) !important;
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed #canvas-eal-lesson-content .prose,
+    .dark .canvas-workspace-themed #canvas-eal-lesson-content .prose :where(h1,h2,h3,h4,h5,h6,p,li,strong,em,a) {
+        color: var(--color-fg) !important;
+    }
+    .lesson-plan-image-delete-menu {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+    }
+    .lesson-plan-image-delete-btn {
+        background-color: #fee2e2;
+        border: 1px solid #fecaca;
+        color: #991b1b;
+    }
+    .lesson-plan-image-delete-btn:hover {
+        background-color: #fecaca;
+        color: #7f1d1d;
+    }
+    .lesson-plan-image-delete-cancel-btn {
+        background-color: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        color: #334155;
+    }
+    .lesson-plan-image-delete-cancel-btn:hover {
+        background-color: #e2e8f0;
+        color: #1e293b;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-image-delete-menu {
+        background-color: color-mix(in srgb, var(--color-surface) 92%, transparent) !important;
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-image-delete-btn {
+        background-color: color-mix(in srgb, #ef4444 22%, var(--color-surface)) !important;
+        border-color: color-mix(in srgb, #ef4444 45%, var(--color-border)) !important;
+        color: #fecaca !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-image-delete-btn:hover {
+        background-color: color-mix(in srgb, #ef4444 30%, var(--color-surface)) !important;
+        color: #fee2e2 !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-image-delete-cancel-btn {
+        background-color: color-mix(in srgb, var(--color-surface) 84%, transparent) !important;
+        border-color: color-mix(in srgb, var(--color-border) 88%, transparent) !important;
+        color: #f8fafc !important;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-image-delete-cancel-btn:hover {
+        background-color: color-mix(in srgb, var(--color-border) 30%, transparent) !important;
+    }
+    /* Teams meetings (dark): remove slate fills to let workspace surface show through */
+    .dark .canvas-workspace-themed .teams-meetings-root [class*="bg-slate-"] {
+        background-color: transparent !important;
+    }
+    /* IT backup (dark): remove slate fill from loader + Redstor card chrome */
+    .dark .canvas-workspace-themed .it-backup-root .it-backup-load-trigger {
+        background-color: transparent !important;
+    }
+    .dark .canvas-workspace-themed .it-backup-root .redstor-summary-card {
+        background-color: transparent !important;
+    }
+    .dark .canvas-workspace-themed .it-backup-root .redstor-summary-content {
+        color: #fff !important;
+    }
+    .dark .canvas-workspace-themed .it-backup-root .redstor-summary-content .text-slate-800,
+    .dark .canvas-workspace-themed .it-backup-root .redstor-summary-content .text-slate-700,
+    .dark .canvas-workspace-themed .it-backup-root .redstor-summary-content .text-slate-600,
+    .dark .canvas-workspace-themed .it-backup-root .redstor-summary-content .text-slate-500,
+    .dark .canvas-workspace-themed .it-backup-root .redstor-summary-content .text-slate-400 {
+        color: #fff !important;
+    }
+    /* Staff management (dark): pale panels stay light while body text is lifted, so retint them. */
+    .dark .canvas-workspace-themed .staff-management-root .bg-slate-50,
+    .dark .canvas-workspace-themed .staff-management-root .bg-slate-100,
+    .dark .canvas-workspace-themed .staff-management-root .bg-gray-50,
+    .dark .canvas-workspace-themed .staff-management-root .bg-gray-100,
+    .dark .canvas-workspace-themed .staff-management-root .bg-orange-50,
+    .dark .canvas-workspace-themed .staff-management-root .bg-amber-50,
+    .dark .canvas-workspace-themed .staff-management-root .bg-blue-50,
+    .dark .canvas-workspace-themed .staff-management-root .bg-red-50,
+    .dark .canvas-workspace-themed .staff-management-root .bg-yellow-50,
+    .dark .canvas-workspace-themed .staff-management-root .bg-green-50 {
+        background-color: color-mix(in srgb, var(--color-fg) 8%, var(--color-surface)) !important;
+        background-image: none !important;
+        color: var(--color-fg) !important;
+    }
+    .dark .canvas-workspace-themed .staff-management-root .bg-slate-200,
+    .dark .canvas-workspace-themed .staff-management-root .bg-gray-200,
+    .dark .canvas-workspace-themed .staff-management-root .bg-orange-100,
+    .dark .canvas-workspace-themed .staff-management-root .bg-orange-200,
+    .dark .canvas-workspace-themed .staff-management-root .bg-amber-100,
+    .dark .canvas-workspace-themed .staff-management-root .bg-blue-100,
+    .dark .canvas-workspace-themed .staff-management-root .bg-red-100,
+    .dark .canvas-workspace-themed .staff-management-root .bg-green-100,
+    .dark .canvas-workspace-themed .staff-management-root .bg-indigo-100,
+    .dark .canvas-workspace-themed .staff-management-root .bg-purple-100,
+    .dark .canvas-workspace-themed .staff-management-root .bg-yellow-100,
+    .dark .canvas-workspace-themed .staff-management-root .bg-yellow-200 {
+        background-color: color-mix(in srgb, var(--color-fg) 16%, var(--color-surface)) !important;
+        background-image: none !important;
+        color: var(--color-fg) !important;
+    }
+    .dark .canvas-workspace-themed .staff-management-root [class*="text-slate-800"],
+    .dark .canvas-workspace-themed .staff-management-root [class*="text-slate-700"],
+    .dark .canvas-workspace-themed .staff-management-root [class*="text-slate-600"] {
+        color: #fff !important;
+    }
+    .dark .canvas-workspace-themed .staff-management-root [class*="text-slate-500"],
+    .dark .canvas-workspace-themed .staff-management-root [class*="text-slate-400"] {
+        color: #cbd5e1 !important;
+    }
+    .dark .canvas-workspace-themed .staff-management-root [class*="border-slate-"] {
+        border-color: color-mix(in srgb, var(--color-border) 78%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .staff-management-root [class*="divide-slate-"] > :not([hidden]) ~ :not([hidden]) {
+        border-color: color-mix(in srgb, var(--color-border) 78%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .staff-management-root input:not([type="checkbox"]):not([type="radio"]),
+    .dark .canvas-workspace-themed .staff-management-root select,
+    .dark .canvas-workspace-themed .staff-management-root textarea {
+        color: #fff !important;
+        background-color: transparent !important;
+        border-color: color-mix(in srgb, var(--color-border) 82%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .staff-management-root input::placeholder,
+    .dark .canvas-workspace-themed .staff-management-root textarea::placeholder {
+        color: #94a3b8 !important;
+    }
+    .dark .canvas-workspace-themed .staff-management-root select option {
+        background-color: var(--color-surface);
+        color: var(--color-fg);
+    }
+    .dark .canvas-workspace-themed .staff-management-root [class*="hover:bg-slate-"]:hover,
+    .dark .canvas-workspace-themed .staff-management-root [class*="hover:bg-gray-"]:hover {
+        background-color: color-mix(in srgb, var(--color-border) 30%, transparent) !important;
+    }
+    .dark .canvas-workspace-themed .staff-management-root .staff-management-tabs > button {
+        color: #818cf8 !important;
+        border-bottom-color: transparent !important;
+    }
+    .dark .canvas-workspace-themed .staff-management-root .staff-management-tabs > button:hover {
+        color: #c4ff7a !important;
+    }
+    .dark .canvas-workspace-themed .staff-management-root .staff-management-tabs > button.font-medium {
+        color: #818cf8 !important;
+        border-bottom-color: #a78bfa !important;
+    }
+    .dark .canvas-workspace-themed .staff-management-root .staff-management-view-details-link {
+        color: #818cf8 !important;
+    }
+    .dark .canvas-workspace-themed .staff-management-root .staff-management-view-details-link:hover {
+        color: #c4ff7a !important;
+    }
+    .dark .canvas-workspace-themed .staff-management-root .staff-management-request-disable-link {
+        color: #a78bfa !important;
+    }
+    .dark .canvas-workspace-themed .staff-management-root .staff-management-request-disable-link:hover {
+        color: #f5b4ff !important;
+    }
+    /* Tailwind bg-white inside workspace — map to semantic surface when dark (display-only). */
+    .canvas-app-shell {
+        background-color: var(--app-canvas-bg);
+        color: var(--app-text);
+        height: 100%;
+        min-height: 0;
+        overflow: hidden;
+    }
+    /* Lock canvas dashboard to viewport: header + workspace fill screen without page scroll */
+    body:has(.canvas-page-root) {
+        height: 100dvh;
+        max-height: 100dvh;
+        overflow: hidden;
+    }
+    .canvas-page-root {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: hidden;
+    }
+    .canvas-workspace-columns {
+        height: 100%;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    /* “Atomas Builder” kicker */
+    .canvas-wizard-atomas-label {
+        font-size: 0.84375rem;
+        line-height: 1.35;
+        font-weight: 800;
+        color: var(--color-accent-2);
+    }
+    .dark .canvas-workspace-themed .lesson-plan-wizard-root .canvas-wizard-atomas-label,
+    .dark .canvas-workspace-themed .eal-lesson-wizard-root .canvas-wizard-atomas-label,
+    .dark .canvas-workspace-themed .online-lesson-wizard-root .canvas-wizard-atomas-label {
+        color: var(--color-accent-2);
+    }
+    .canvas-wizard-step-card {
+        border-radius: 1rem;
+        border: 1px solid rgb(226 232 240 / 0.9);
+        background: rgb(255 255 255 / 0.95);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 0 0 1px rgb(255 255 255 / 0.8);
+    }
+    .canvas-workspace-shell {
+        position: relative;
+        background: transparent;
+        transition: background 220ms ease;
+    }
+    /* Main dashboard chat: viewport-constrained column; composer dock always visible */
+    .canvas-dashboard-chat {
+        height: 100%;
+        min-height: 0;
+    }
+    .canvas-dashboard-chat-scroll {
+        background-color: transparent;
+    }
+
+    .canvas-dashboard-chat-idle-extras {
+        flex-shrink: 0;
+    }
+    /* Dark: AI “enhance” controls — match Class Tools / chrome hyperlink green */
+    .dark .canvas-workspace-themed .canvas-enhance-prompt-ctrl {
+        color: #818cf8 !important;
+    }
+    .dark .canvas-workspace-themed .canvas-enhance-prompt-ctrl svg {
+        color: inherit;
+        stroke: currentColor;
+    }
+    .dark .canvas-workspace-themed .canvas-enhance-prompt-ctrl:hover:not(:disabled) {
+        color: #c4ff7a !important;
+    }
+    .dark .canvas-workspace-themed button.canvas-enhance-prompt-ctrl.border {
+        background-color: color-mix(in srgb, #818cf8 18%, transparent) !important;
+        border-color: color-mix(in srgb, #818cf8 55%, var(--color-border)) !important;
+    }
+    .dark .canvas-workspace-themed button.canvas-enhance-prompt-ctrl.border:hover:not(:disabled) {
+        background-color: color-mix(in srgb, #818cf8 28%, transparent) !important;
+        border-color: color-mix(in srgb, #c4ff7a 45%, var(--color-border)) !important;
+    }
+    /* Image creator “Enhance prompt”: avoid disabled:opacity-50 washing out the accent; explicit enabled/disabled colors */
+    .dark .canvas-workspace-themed button.canvas-image-creator-enhance-btn:not(:disabled) {
+        color: #818cf8 !important;
+        opacity: 1 !important;
+    }
+    .dark .canvas-workspace-themed button.canvas-image-creator-enhance-btn:not(:disabled) svg {
+        color: #818cf8 !important;
+        stroke: #818cf8 !important;
+        filter: drop-shadow(0 0 10px rgba(163, 255, 60, 0.55));
+    }
+    .dark .canvas-workspace-themed button.canvas-image-creator-enhance-btn:not(:disabled):hover {
+        color: #c4ff7a !important;
+    }
+    .dark .canvas-workspace-themed button.canvas-image-creator-enhance-btn:not(:disabled):hover svg {
+        color: #c4ff7a !important;
+        stroke: #c4ff7a !important;
+    }
+    .dark .canvas-workspace-themed button.canvas-image-creator-enhance-btn:disabled {
+        opacity: 1 !important;
+        color: #64748b !important;
+        cursor: not-allowed !important;
+    }
+    .dark .canvas-workspace-themed button.canvas-image-creator-enhance-btn:disabled svg {
+        color: #64748b !important;
+        stroke: #64748b !important;
+        filter: none !important;
+    }
+    /* Light: same grey / green affordance as dark (dark rules above override with higher specificity) */
+    .canvas-workspace-themed button.canvas-image-creator-enhance-btn:disabled {
+        opacity: 1 !important;
+        color: #94a3b8 !important;
+        cursor: not-allowed !important;
+    }
+    .canvas-workspace-themed button.canvas-image-creator-enhance-btn:disabled svg {
+        color: #94a3b8 !important;
+        stroke: #94a3b8 !important;
+        filter: none !important;
+    }
+    .canvas-workspace-themed button.canvas-image-creator-enhance-btn:not(:disabled) {
+        color: #059669 !important;
+        opacity: 1 !important;
+    }
+    .canvas-workspace-themed button.canvas-image-creator-enhance-btn:not(:disabled) svg {
+        color: #059669 !important;
+        stroke: #059669 !important;
+        filter: none !important;
+    }
+    .canvas-workspace-themed button.canvas-image-creator-enhance-btn:not(:disabled):hover {
+        color: #047857 !important;
+    }
+    .canvas-workspace-themed button.canvas-image-creator-enhance-btn:not(:disabled):hover svg {
+        color: #047857 !important;
+        stroke: #047857 !important;
+    }
+    .canvas-workspace-badge {
+        border-color: color-mix(in srgb, var(--canvas-core) 26%, #cbd5e1) !important;
+        color: color-mix(in srgb, var(--canvas-core) 70%, #334155) !important;
+        background: color-mix(in srgb, var(--canvas-surface) 78%, #ffffff) !important;
+        transition: all 200ms ease;
+    }
+
+    /* Image returned to chat: edit control sits on the picture; lesson pill sits in the bubble.
+       Colours are locked so dark-mode surface remaps cannot leave purple type on a dark field. */
+    .canvas-chat-image-edit {
+        background: #ffffff !important;
+        border-color: rgb(255 255 255 / 0.92) !important;
+        color: #312e81 !important;
+    }
+    .canvas-chat-image-edit svg {
+        color: #312e81 !important;
+        stroke: #312e81 !important;
+    }
+    .canvas-chat-image-edit:hover,
+    .canvas-chat-image-edit:focus-visible {
+        background: #4f46e5 !important;
+        border-color: #4f46e5 !important;
+        color: #ffffff !important;
+    }
+    .canvas-chat-image-edit:hover svg,
+    .canvas-chat-image-edit:focus-visible svg {
+        color: #ffffff !important;
+        stroke: #ffffff !important;
+    }
+    .canvas-chat-image-lesson {
+        background: #ffffff !important;
+        border-color: #a5b4fc !important;
+        color: #4338ca !important;
+    }
+    .canvas-chat-image-lesson:hover,
+    .canvas-chat-image-lesson:focus-visible {
+        background: #4f46e5 !important;
+        border-color: #4f46e5 !important;
+        color: #ffffff !important;
+    }
+    .dark .canvas-workspace-themed .canvas-chat-image-edit {
+        background: #ffffff !important;
+        border-color: rgb(255 255 255 / 0.92) !important;
+        color: #1e1b4b !important;
+    }
+    .dark .canvas-workspace-themed .canvas-chat-image-edit svg {
+        color: #1e1b4b !important;
+        stroke: #1e1b4b !important;
+    }
+    .dark .canvas-workspace-themed .canvas-chat-image-edit:hover,
+    .dark .canvas-workspace-themed .canvas-chat-image-edit:focus-visible {
+        background: var(--color-primary) !important;
+        border-color: var(--color-primary) !important;
+        color: #ffffff !important;
+    }
+    .dark .canvas-workspace-themed .canvas-chat-image-edit:hover svg,
+    .dark .canvas-workspace-themed .canvas-chat-image-edit:focus-visible svg {
+        color: #ffffff !important;
+        stroke: #ffffff !important;
+    }
+    .dark .canvas-workspace-themed .canvas-chat-image-lesson {
+        background: color-mix(in srgb, var(--color-surface) 82%, #ffffff) !important;
+        border-color: color-mix(in srgb, var(--color-link) 72%, var(--color-border)) !important;
+        color: #ffffff !important;
+    }
+    .dark .canvas-workspace-themed .canvas-chat-image-lesson:hover,
+    .dark .canvas-workspace-themed .canvas-chat-image-lesson:focus-visible {
+        background: var(--color-primary) !important;
+        border-color: var(--color-primary) !important;
+        color: #ffffff !important;
+    }
+    .dark .canvas-workspace-themed .canvas-chat-image-lesson {
+        background: rgb(12 10 26 / 0.92) !important;
+        border-color: #00f5ff !important;
+        color: #ffffff !important;
+    }
+    .dark .canvas-workspace-themed .canvas-chat-image-lesson:hover,
+    .dark .canvas-workspace-themed .canvas-chat-image-lesson:focus-visible {
+        background: #00f5ff !important;
+        border-color: #00f5ff !important;
+        color: #030308 !important;
+    }
+    .canvas-workspace-accent-btn {
+        background: var(--canvas-core) !important;
+        border-color: color-mix(in srgb, var(--canvas-core) 75%, #111827) !important;
+        color: #fff !important;
+    }
+    .canvas-workspace-accent-btn:hover {
+        background: color-mix(in srgb, var(--canvas-core) 85%, #000) !important;
+    }
+    @keyframes canvas-persona-pill-pulse-orange {
+        0%, 100% {
+            box-shadow:
+                0 0 0 2px rgb(255 255 255 / 0.95),
+                0 0 0 4px rgb(234 88 12 / 0.45),
+                0 4px 14px rgb(194 65 12 / 0.35);
+        }
+        50% {
+            box-shadow:
+                0 0 0 2px rgb(255 255 255 / 0.95),
+                0 0 0 7px rgb(249 115 22 / 0.38),
+                0 6px 18px rgb(194 65 12 / 0.42);
+        }
+    }
+    @keyframes canvas-persona-pill-pulse-green {
+        0%, 100% {
+            box-shadow:
+                0 0 0 2px rgb(255 255 255 / 0.95),
+                0 0 0 4px rgb(34 197 94 / 0.55),
+                0 4px 14px rgb(22 163 74 / 0.45);
+        }
+        50% {
+            box-shadow:
+                0 0 0 2px rgb(255 255 255 / 0.95),
+                0 0 0 7px rgb(74 222 128 / 0.45),
+                0 6px 20px rgb(22 163 74 / 0.55);
+        }
+    }
+    /* Dark: global theme textarea fills a rectangle and hides the composer card's rounded top */
+    .dark .canvas-workspace-themed #canvas-main-chat-input {
+        background-color: transparent !important;
+        border-width: 0 !important;
+        box-shadow: none !important;
+    }
+    .dark .canvas-workspace-themed #canvas-main-chat-input:focus {
+        border-color: transparent !important;
+        box-shadow: none !important;
+    }
+    .canvas-workspace-themed #canvas-chat-messages .canvas-atom-thinking {
+        transition: color 220ms ease;
+    }
+
+    /* Dark mode: keep atom icons neutral slate across all personas */
+    .dark .canvas-workspace-themed .canvas-atomas-menu-icon {
+        color: #94a3b8 !important;
+    }
+    /* Neon chat stream: white assistant copy (icons excluded — sparkles green, thinking atom chroma) */
+    .dark .canvas-workspace-themed #canvas-chat-messages [data-role]:not([data-role="user"]) .canvas-chat-message-text,
+    .dark .canvas-workspace-themed #canvas-chat-messages [data-role]:not([data-role="user"]) .canvas-chat-html,
+    .dark .canvas-workspace-themed #canvas-chat-messages [data-role]:not([data-role="user"]) .canvas-chat-html * {
+        color: #ffffff !important;
+    }
+
+    /* Cursor blink: classic on/off blink (~1s per cycle) */
+    @keyframes canvas-cursor-blink {
+        0%, 49% { opacity: 1; }
+        50%, 100% { opacity: 0; }
+    }
+    .canvas-cursor-blink {
+        animation: canvas-cursor-blink 1s step-end infinite;
+    }
+    /* Chat message text – clear, readable font */
+    .canvas-chat-message-text {
+        font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 1rem;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 1.625;
+        overflow-wrap: break-word;
+    }
+    /* Guaranteed paragraph spacing for assistant HTML output */
+    .canvas-chat-html p { margin: 0 0 0.9rem 0; }
+    .canvas-chat-html p:last-child { margin-bottom: 0; }
+    .canvas-chat-html ul,
+    .canvas-chat-html ol { margin: 0.7rem 0 0.9rem 1.2rem; }
+    .canvas-chat-html li + li { margin-top: 0.25rem; }
+    /* If markdown parser emits double <br> instead of <p>, still show paragraph gap */
+    .canvas-chat-html br + br { display: block; margin-top: 0.55rem; content: ""; }
+    .canvas-chat-html .lesson-plan-table-wrap { overflow-x: auto; margin: 0.75rem 0; max-width: 100%; }
+    .canvas-chat-html table { border-collapse: collapse; width: 100%; font-size: 0.9375rem; }
+    .canvas-chat-html th,
+    .canvas-chat-html td { border: 1px solid rgb(203 213 225); padding: 0.35rem 0.6rem; text-align: left; vertical-align: top; }
+    .canvas-chat-html th { background: rgb(248 250 252); font-weight: 600; }
+    .canvas-chat-html h2,
+    .canvas-chat-html h3 { font-weight: 600; margin: 1rem 0 0.5rem; line-height: 1.35; }
+    .canvas-chat-html h2 { font-size: 1.125rem; }
+    .canvas-chat-html h3 { font-size: 1rem; }
+    .canvas-chat-html strong { font-weight: 600; }
+
+    @keyframes canvas-ai-icon-shimmer {
+        0%, 100% { filter: none; opacity: 1; }
+        50% { filter: none; opacity: 0.9; }
+    }
+    @keyframes canvas-atom-thinking-pulse {
+        0%, 100% { transform: scale(1); opacity: 0.85; }
+        50% { transform: scale(1.18); opacity: 1; }
+    }
+    @keyframes canvas-atom-thinking-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    /* Thinking atom: white / green / purple while spinning (light: visible neutrals on white bg) */
+    @keyframes canvas-atom-thinking-chroma-light {
+        0%, 100% { color: #cbd5e1; }
+        33% { color: #059669; }
+        66% { color: #9333ea; }
+    }
+    @keyframes canvas-atom-thinking-chroma-dark {
+        0%, 100% { color: #ffffff; }
+        33% { color: #818cf8; }
+        66% { color: #c084fc; }
+    }
+    .canvas-atom-thinking {
+        animation: canvas-atom-thinking-pulse 1s ease-in-out infinite;
+    }
+    .canvas-workspace-themed #canvas-chat-messages .canvas-atom-thinking svg {
+        transform-origin: 50% 50%;
+        animation: canvas-atom-thinking-spin 1.6s linear infinite,
+            canvas-atom-thinking-chroma-light 2.4s linear infinite;
+    }
+    .canvas-enterprise-ai-info-btn {
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 9999px;
+        color: #64748b;
+        transition: color 0.15s ease, background-color 0.15s ease;
+    }
+    .canvas-enterprise-ai-info-btn:hover,
+    .canvas-enterprise-ai-info-btn:focus-visible {
+        color: #334155;
+        background-color: rgba(148, 163, 184, 0.18);
+        outline: none;
+    }
+    @media (max-width: 640px) {
+        .canvas-screen-help-panel {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: auto;
+            bottom: 0;
+            width: 100%;
+            max-height: min(70vh, 24rem);
+            border-radius: 1rem 1rem 0 0;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+        }
+    }
+    .dark .canvas-workspace-themed #canvas-chat-messages .canvas-atom-thinking svg {
+        animation: canvas-atom-thinking-spin 1.6s linear infinite,
+            canvas-atom-thinking-chroma-dark 2.4s linear infinite;
+    }
+    /* Reusable modal styling for a more polished product feel */
+    .canvas-modal-overlay {
+        background: rgba(10, 12, 20, 0.4);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+    .canvas-modal-panel {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 1rem;
+        box-shadow: 0 24px 60px -20px rgba(8, 12, 24, 0.45), 0 2px 8px rgba(8, 12, 24, 0.06);
+        animation: pop-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .canvas-modal-header {
+        position: relative;
+        background: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+    }
+    .canvas-modal-header h3 {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 650;
+        letter-spacing: -0.02em;
+    }
+    .canvas-modal-footer {
+        background: var(--color-surface-2);
+        border-top: 1px solid var(--color-border);
+    }
+    .canvas-modal-close {
+        border-radius: var(--radius-control);
+        color: var(--color-fg-subtle);
+        transition: background-color 0.12s ease, color 0.12s ease;
+    }
+    .canvas-modal-close:hover {
+        color: var(--color-fg);
+        background: var(--color-surface-2);
+    }
+
+    .dark .canvas-modal-overlay {
+        background: rgba(0, 0, 0, 0.6);
+    }
+    .dark .canvas-modal-panel {
+        border-color: var(--color-border-strong);
+        box-shadow: 0 24px 70px -18px rgba(0, 0, 0, 0.85);
+    }
+    .dark .canvas-modal-close {
+        color: var(--color-fg-muted);
+    }
+    .dark .canvas-workspace-badge {
+        border-color: color-mix(in srgb, var(--canvas-core) 40%, var(--color-border)) !important;
+        color: color-mix(in srgb, var(--canvas-core) 55%, var(--color-fg)) !important;
+        background: color-mix(in srgb, var(--canvas-surface) 35%, var(--color-surface)) !important;
+    }
+    /* Migration banner: force white pill + red label (not themed surface grey in dark mode) */
+    .canvas-migration-action-badge {
+        background: #ffffff !important;
+        color: #dc2626 !important;
+        border: 1px solid #ffffff !important;
+        box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
+    }
+    .canvas-alert-only-nav [data-nav-action]:not([data-nav-action="alert_system"]) {
+        opacity: 0.4;
+        pointer-events: none;
+        cursor: not-allowed;
+    }
+
+    .dark .canvas-migration-action-badge {
+        background: #ffffff !important;
+        color: #dc2626 !important;
+        border-color: #ffffff !important;
+    }
+    .canvas-modal-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+        font-weight: 550;
+        border-radius: var(--radius-control);
+        border: 1px solid transparent;
+        transition: transform 0.12s ease-out, background-color 0.12s ease-out;
+    }
+    .canvas-modal-btn:active:not(:disabled) {
+        transform: scale(0.98);
+    }
+    .canvas-modal-btn:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+    }
+    .canvas-modal-btn-primary {
+        background-color: var(--color-primary);
+        background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0));
+        color: var(--color-primary-fg);
+        box-shadow: var(--shadow-glow);
+    }
+    .canvas-modal-btn-primary:hover:not(:disabled) {
+        background-color: var(--color-primary-hover);
+    }
+    .canvas-modal-btn-secondary {
+        background: var(--color-surface);
+        color: var(--color-fg);
+        border-color: var(--color-border-strong);
+    }
+    .canvas-modal-btn-secondary:hover:not(:disabled) {
+        background: var(--color-surface-2);
+    }
+    .canvas-modal-btn-danger {
+        background: var(--color-danger);
+        color: #fff;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
+    .canvas-modal-btn-danger:hover:not(:disabled) {
+        background: var(--color-danger-hover);
+    }
+    /* Selected text: delete animation while amend is in progress */
+    @keyframes lesson-plan-delete {
+        to { opacity: 0; filter: blur(4px); transform: scale(0.98); }
+    }
+    .lesson-plan-editing-delete {
+        animation: lesson-plan-delete 0.5s ease-out forwards !important;
+        background: rgba(251, 191, 36, 0.35) !important;
+        border-radius: 3px;
+        padding: 0 2px;
+        display: inline;
+    }
+    /* Obvious pulse when new content appears after amend */
+    @keyframes lesson-plan-appeared {
+        0% { box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.55); background-color: rgba(224, 231, 255, 0.45); }
+        50% { box-shadow: 0 0 0 8px rgba(79, 70, 229, 0.2); background-color: rgba(224, 231, 255, 0.2); }
+        100% { box-shadow: 0 0 0 0 transparent; background-color: transparent; }
+    }
+    .lesson-plan-just-updated {
+        animation: lesson-plan-appeared 1s ease-out forwards;
+        border-radius: 8px;
+    }
+    /* Banner shown while amending selection */
+    .lesson-plan-amending-banner {
+        animation: lesson-plan-amending-pulse 1.2s ease-in-out infinite;
+    }
+    @keyframes lesson-plan-amending-pulse {
+        0%, 100% { opacity: 1; background-color: rgba(79, 70, 229, 0.1); }
+        50% { opacity: 0.85; background-color: rgba(79, 70, 229, 0.18); }
+    }
+    @keyframes lesson-plan-amending-pulse-dark {
+        0%, 100% { opacity: 1; background-color: color-mix(in srgb, #818cf8 12%, var(--color-surface)); }
+        50% { opacity: 0.9; background-color: color-mix(in srgb, #818cf8 20%, var(--color-surface)); }
+    }
+    .dark .canvas-workspace-themed .lesson-plan-amending-banner {
+        color: #f8fafc !important;
+        border-color: color-mix(in srgb, #818cf8 45%, var(--color-border)) !important;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45) !important;
+        animation: lesson-plan-amending-pulse-dark 1.2s ease-in-out infinite;
+    }
+    .dark .canvas-workspace-themed .lesson-plan-amending-banner svg {
+        color: #c4ff7a !important;
+    }
+    /* Apply to lesson: indeterminate progress bar */
+    @keyframes apply-progress {
+        0% { transform: translateX(-100%); }
+        50% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+    .apply-lesson-progress-bar {
+        animation: apply-progress 1.2s ease-in-out infinite;
+    }
+    /* SEN Activity Plan: day sections with colourful icons and borders */
+    .sen-activity-plan-content {
+        font-size: 0.9375rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+    .sen-activity-plan-content .sen-activity-day {
+        margin-top: 0;
+        margin-bottom: 0;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-left: 4px solid #c2410c;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 4px 14px rgba(15, 23, 42, 0.04);
+        background: linear-gradient(to right, rgba(251, 146, 60, 0.1), rgba(255, 255, 255, 0.92) 18%);
+        padding: 1rem 1.15rem 1.15rem 1.35rem;
+    }
+    .sen-activity-plan-content .sen-activity-day:first-child { margin-top: 0; }
+    .sen-activity-plan-content .sen-activity-day[data-day="monday"]   { border-left-color: #ea580c; background: linear-gradient(to right, rgba(234, 88, 12, 0.1), rgba(255, 255, 255, 0.92) 18%); }
+    .sen-activity-plan-content .sen-activity-day[data-day="tuesday"]  { border-left-color: #ca8a04; background: linear-gradient(to right, rgba(202, 138, 4, 0.1), rgba(255, 255, 255, 0.92) 18%); }
+    .sen-activity-plan-content .sen-activity-day[data-day="wednesday"]{ border-left-color: #16a34a; background: linear-gradient(to right, rgba(22, 163, 74, 0.1), rgba(255, 255, 255, 0.92) 18%); }
+    .sen-activity-plan-content .sen-activity-day[data-day="thursday"] { border-left-color: #2563eb; background: linear-gradient(to right, rgba(37, 99, 235, 0.1), rgba(255, 255, 255, 0.92) 18%); }
+    .sen-activity-plan-content .sen-activity-day[data-day="friday"]   { border-left-color: #9333ea; background: linear-gradient(to right, rgba(147, 51, 234, 0.1), rgba(255, 255, 255, 0.92) 18%); }
+    .sen-activity-plan-content .sen-activity-day h2 {
+        margin: 0 0 0.65rem 0;
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #0f172a;
+        padding: 0.35rem 0 0.5rem 0;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+        letter-spacing: -0.01em;
+    }
+    .sen-activity-plan-content .sen-activity-day ul { margin: 0.25rem 0 0 1rem; padding-left: 0.5rem; }
+    .sen-activity-plan-content .sen-activity-day li { margin-bottom: 0.35rem; }
+    .dark .canvas-workspace-themed .sen-planning-root .sen-activity-plan-content .sen-activity-day {
+        border-color: color-mix(in srgb, var(--color-border) 78%, transparent);
+        box-shadow: none;
+        background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+    }
+    .dark .canvas-workspace-themed .sen-planning-root .sen-activity-plan-content .sen-activity-day h2 {
+        color: var(--color-fg);
+        border-bottom-color: color-mix(in srgb, var(--color-border) 72%, transparent);
+    }
+    .dark .canvas-workspace-themed .sen-planning-root .prose,
+    .dark .canvas-workspace-themed .sen-planning-root .prose :where(h1,h2,h3,h4,h5,h6,strong,li,p) {
+        color: var(--color-fg);
+    }
+    /* Student Work Marking (canvas): indeterminate bar + split feedback pane + upload animation */
+    .swm-indeterminate-bar { position: relative; overflow: hidden; }
+    .swm-indeterminate-bar .swm-indeterminate-inner {
+        position: absolute; left: 0; top: 0; height: 100%; width: 100%;
+        background: repeating-linear-gradient(90deg, #a78bfa 0 20px, #7c3aed 20px 40px);
+        animation: swm-indeterminate-move 1.2s linear infinite;
+    }
+    @keyframes swm-indeterminate-move { 0% { left: -40%; } 100% { left: 100%; } }
+    .swm-split .swm-grid-pane { width: 100%; transition: width 0.3s ease; min-width: 0; }
+    .swm-split .swm-feedback-pane { width: 0; min-width: 0; overflow: hidden; transition: width 0.3s ease; }
+    .swm-split.swm-feedback-open .swm-grid-pane { width: 33.333%; }
+    .swm-split.swm-feedback-open .swm-feedback-pane { width: 66.666%; }
+    @media (max-width: 1024px) {
+        .swm-split.swm-feedback-open { flex-direction: column; }
+        .swm-split.swm-feedback-open .swm-grid-pane,
+        .swm-split.swm-feedback-open .swm-feedback-pane { width: 100%; }
+    }
+    @keyframes swm-file-rise {
+        0%   { transform: translateY(6px) scale(0.9); opacity: 0.4; }
+        50%  { transform: translateY(-4px) scale(1.05); opacity: 1; }
+        100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+    .swm-file-rise { animation: swm-file-rise 0.7s ease-out forwards; }
+    @keyframes swm-orbit {
+        0% { transform: rotate(0deg) translateX(10px) rotate(0deg); }
+        100% { transform: rotate(360deg) translateX(10px) rotate(-360deg); }
+    }
+    .swm-orbit-dot { animation: swm-orbit 1s linear infinite; width: 6px; height: 6px; border-radius: 9999px; background: #7c3aed; position: absolute; top: 50%; left: 50%; margin: -3px; }
+    [x-cloak] { display: none !important; }
+    /* SharePoint Favourites (React): dark-mode site URL links */
+    .dark .canvas-workspace-themed #canvas-react-root-sharepoint_favourites table a[href],
+    .dark .canvas-workspace-themed .sharepoint-favourites-root a.sp-fav-site-url,
+    .dark .canvas-workspace-themed #canvas-react-root-sharepoint_favourites table a[href]:visited,
+    .dark .canvas-workspace-themed .sharepoint-favourites-root a.sp-fav-site-url:visited {
+        color: #a5b4fc !important;
+    }
+    .dark .canvas-workspace-themed #canvas-react-root-sharepoint_favourites table a[href]:hover,
+    .dark .canvas-workspace-themed #canvas-react-root-sharepoint_favourites table a[href]:focus-visible,
+    .dark .canvas-workspace-themed .sharepoint-favourites-root a.sp-fav-site-url:hover,
+    .dark .canvas-workspace-themed .sharepoint-favourites-root a.sp-fav-site-url:focus-visible {
+        color: #ffffff !important;
+    }

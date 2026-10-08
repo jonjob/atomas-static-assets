@@ -1,0 +1,118 @@
+/*
+ * App design tokens (display-only; not loaded by PDF/export templates).
+ *
+ * Two UI modes, applied by theme.js / the FOUC script in base.html:
+ *   light — cool off-white page with soft pastel mesh, white cards, indigo accent, blue>violet>pink brand gradient.
+ *   dark  — html.dark: deep blue-black surfaces with the same mesh glow, gradient cards and an indigo accent lifted for contrast.
+ *
+ * Prefer Tailwind utilities mapped in input.css @theme:
+ *   bg-app-page, bg-app-surface, bg-app-surface-2, text-app-fg, text-app-fg-muted, text-app-fg-subtle,
+ *   border-app-border, bg-app-input-bg, text-app-input-fg, bg-app-primary, bg-app-chrome, shadow-app-soft,
+ *   rounded-app-card, font-display, and the ui-* component classes.
+ *
+ * Standalone templates that do not extend base.html (e.g. landing.html) stay light-only.
+ */
+
+:root {
+    --app-body-font: "Geist", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --app-heading-font: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+    --app-heading-tracking: -0.025em;
+    --color-page-bg: #f7f8fa;
+    --color-surface: #ffffff;
+    --color-surface-2: #f2f4f7;
+    --color-border: #e4e7ec;
+    --color-border-strong: #d0d5dd;
+    --color-fg: #0f1117;
+    --color-fg-muted: #475467;
+    --color-fg-subtle: #8a93a3;
+    --color-input-bg: #ffffff;
+    --color-input-fg: #0f1117;
+    --color-primary: #4f46e5;
+    --color-primary-hover: #4338ca;
+    --color-primary-fg: #ffffff;
+    --color-ring: rgba(79, 70, 229, 0.22);
+    --color-link: #4f46e5;
+    --color-link-hover: #3730a3;
+    --color-chrome-bg: #f7f8fa;
+    --color-chrome-fg: #0f1117;
+    --color-danger: #e5484d;
+    --color-danger-hover: #ce2c31;
+    --color-success: #12a594;
+
+    --color-accent-1: #3b82f6;
+    --color-accent-2: #4f46e5;
+    --color-accent-3: #06b6d4;
+    --color-accent-teal: #12a594;
+
+    --gradient-brand: linear-gradient(105deg, #4f7bff 0%, #7c5cff 35%, #d946ef 70%, #fb7185 100%);
+    --gradient-text: linear-gradient(105deg, #4338ca 0%, #7c3aed 40%, #c026d3 75%, #e11d48 100%);
+    --gradient-brand-soft: linear-gradient(105deg, rgba(79, 123, 255, 0.1), rgba(124, 92, 255, 0.1) 35%, rgba(217, 70, 239, 0.08) 70%, rgba(251, 113, 133, 0.08));
+    --gradient-orb:
+        radial-gradient(closest-side at 30% 55%, rgba(79, 123, 255, 0.55), transparent),
+        radial-gradient(closest-side at 55% 45%, rgba(124, 92, 255, 0.5), transparent),
+        radial-gradient(closest-side at 75% 60%, rgba(236, 72, 153, 0.4), transparent),
+        radial-gradient(closest-side at 90% 40%, rgba(251, 146, 60, 0.3), transparent);
+    --gradient-page:
+        radial-gradient(ellipse 55% 40% at 15% -5%, rgba(124, 92, 255, 0.12), transparent 70%),
+        radial-gradient(ellipse 45% 35% at 90% 0%, rgba(56, 189, 248, 0.12), transparent 70%),
+        radial-gradient(ellipse 50% 35% at 70% 105%, rgba(236, 72, 153, 0.08), transparent 70%);
+    --card-bg: linear-gradient(180deg, #ffffff, #fbfcfe);
+    --card-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    --spotlight: rgba(124, 92, 255, 0.1);
+
+    --radius-card: 1.25rem;
+    --radius-control: 0.75rem;
+
+    --shadow-soft: 0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 12px -4px rgba(16, 24, 40, 0.06);
+    --shadow-lift: 0 2px 4px rgba(16, 24, 40, 0.04), 0 22px 44px -16px rgba(76, 60, 200, 0.28);
+    --shadow-glow: 0 1px 2px rgba(16, 24, 40, 0.12), 0 10px 24px -8px rgba(99, 102, 241, 0.6);
+}
+
+html.dark {
+    --color-page-bg: #08090c;
+    --color-surface: #111318;
+    --color-surface-2: #181b21;
+    --color-border: #23262e;
+    --color-border-strong: #31353f;
+    --color-fg: #edeef1;
+    --color-fg-muted: #a3a9b6;
+    --color-fg-subtle: #6d7482;
+    --color-input-bg: #0d0f13;
+    --color-input-fg: #edeef1;
+    --color-primary: #5b5ef0;
+    --color-primary-hover: #6e72f5;
+    --color-primary-fg: #ffffff;
+    --color-ring: rgba(129, 140, 248, 0.3);
+    --color-link: #a5b4fc;
+    --color-link-hover: #c7d2fe;
+    --color-chrome-bg: #0a0b0e;
+    --color-chrome-fg: #edeef1;
+    --color-danger: #f2555a;
+    --color-danger-hover: #ff6369;
+    --color-success: #2dd4bf;
+
+    --color-accent-1: #60a5fa;
+    --color-accent-2: #818cf8;
+    --color-accent-3: #22d3ee;
+    --color-accent-teal: #2dd4bf;
+
+    --gradient-brand: linear-gradient(105deg, #4f7bff 0%, #7c5cff 35%, #d946ef 70%, #fb7185 100%);
+    --gradient-text: linear-gradient(105deg, #a5b8ff 0%, #c4b5fd 35%, #f0abfc 70%, #fda4af 100%);
+    --gradient-brand-soft: linear-gradient(105deg, rgba(79, 123, 255, 0.14), rgba(124, 92, 255, 0.14) 35%, rgba(217, 70, 239, 0.1) 70%, rgba(251, 113, 133, 0.1));
+    --gradient-orb:
+        radial-gradient(closest-side at 30% 55%, rgba(59, 108, 255, 0.6), transparent),
+        radial-gradient(closest-side at 55% 45%, rgba(124, 92, 255, 0.55), transparent),
+        radial-gradient(closest-side at 75% 60%, rgba(236, 72, 153, 0.45), transparent),
+        radial-gradient(closest-side at 90% 40%, rgba(251, 113, 133, 0.3), transparent);
+    --gradient-page:
+        radial-gradient(ellipse 55% 40% at 15% -5%, rgba(124, 92, 255, 0.18), transparent 70%),
+        radial-gradient(ellipse 45% 35% at 90% 0%, rgba(56, 132, 255, 0.14), transparent 70%),
+        radial-gradient(ellipse 50% 35% at 70% 105%, rgba(236, 72, 153, 0.1), transparent 70%);
+    --card-bg: linear-gradient(180deg, #14161c, #0e1014);
+    --card-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    --spotlight: rgba(140, 120, 255, 0.14);
+
+    --shadow-soft: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+    --shadow-lift: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 24px 50px -18px rgba(0, 0, 0, 0.9), 0 0 40px -18px rgba(124, 92, 255, 0.5);
+    --shadow-glow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 0 0 1px rgba(165, 180, 252, 0.3), 0 10px 28px -8px rgba(99, 102, 241, 0.75);
+}

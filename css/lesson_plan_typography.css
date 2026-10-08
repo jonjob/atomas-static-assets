@@ -1,0 +1,289 @@
+/* Lesson plan reading — strong rules so Tailwind CDN preflight cannot flatten headings/spacing/tables. */
+
+.lesson-plan-prose-wrapper {
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.lesson-plan-prose {
+    --lp-text: #1e293b;
+    --lp-muted: #64748b;
+    --lp-border: #cbd5e1;
+    --lp-accent: #4f46e5;
+    --lp-surface: #f8fafc;
+    color: var(--lp-text) !important;
+    line-height: 1.75 !important;
+    font-size: 1rem !important;
+}
+
+/* Headings: preflight sets font-size:inherit on h1–h6 — restore hierarchy */
+.lesson-plan-prose h1,
+.lesson-plan-prose h2,
+.lesson-plan-prose h3,
+.lesson-plan-prose h4,
+.lesson-plan-prose h5,
+.lesson-plan-prose h6 {
+    display: block !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    line-height: 1.3 !important;
+    margin-top: 1.35em !important;
+    margin-bottom: 0.55em !important;
+    padding: 0 !important;
+}
+
+.lesson-plan-prose h1:first-child,
+.lesson-plan-prose h2:first-child,
+.lesson-plan-prose h3:first-child {
+    margin-top: 0 !important;
+}
+
+.lesson-plan-prose h1 {
+    font-size: 1.875rem !important;
+    border-bottom: 2px solid var(--lp-border) !important;
+    padding-bottom: 0.4em !important;
+}
+
+.lesson-plan-prose h2 {
+    font-size: 1.45rem !important;
+    border-left: 4px solid var(--lp-accent) !important;
+    padding-left: 0.65rem !important;
+    margin-top: 1.6em !important;
+}
+
+.lesson-plan-prose h3 {
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+    color: #334155 !important;
+}
+
+.lesson-plan-prose h4 {
+    font-size: 1.08rem !important;
+    color: #475569 !important;
+}
+
+.lesson-plan-prose h5,
+.lesson-plan-prose h6 {
+    font-size: 1rem !important;
+    color: #64748b !important;
+}
+
+.lesson-plan-prose p {
+    display: block !important;
+    margin: 0 0 1em 0 !important;
+    padding: 0 !important;
+}
+
+.lesson-plan-prose p:last-child {
+    margin-bottom: 0 !important;
+}
+
+.lesson-plan-prose ul,
+.lesson-plan-prose ol {
+    display: block !important;
+    margin: 0.4em 0 1em 0 !important;
+    padding-left: 1.5em !important;
+    list-style-position: outside !important;
+}
+
+.lesson-plan-prose ul {
+    list-style-type: disc !important;
+}
+
+.lesson-plan-prose ol {
+    list-style-type: decimal !important;
+}
+
+.lesson-plan-prose li {
+    display: list-item !important;
+    margin: 0.35em 0 !important;
+}
+
+.lesson-plan-prose li > p {
+    margin-bottom: 0.4em !important;
+}
+
+.lesson-plan-prose hr {
+    display: block !important;
+    border: none !important;
+    border-top: 1px solid var(--lp-border) !important;
+    margin: 1.75em 0 !important;
+}
+
+.lesson-plan-prose strong {
+    font-weight: 700 !important;
+    color: #0f172a !important;
+}
+
+.lesson-plan-prose code {
+    background: var(--lp-surface) !important;
+    border: 1px solid var(--lp-border) !important;
+    padding: 0.12em 0.35em !important;
+    border-radius: 0.25rem !important;
+    font-size: 0.88em !important;
+}
+
+.lesson-plan-prose pre {
+    display: block !important;
+    background: #1e293b !important;
+    color: #f1f5f9 !important;
+    padding: 1rem 1.1rem !important;
+    border-radius: 0.5rem !important;
+    overflow-x: auto !important;
+    margin: 1em 0 !important;
+    font-size: 0.88rem !important;
+}
+
+.lesson-plan-prose pre code {
+    background: transparent !important;
+    border: none !important;
+    color: inherit !important;
+    padding: 0 !important;
+}
+
+.lesson-plan-prose blockquote {
+    display: block !important;
+    border-left: 4px solid #94a3b8 !important;
+    margin: 1em 0 !important;
+    padding: 0.5em 0 0.5em 1em !important;
+    color: var(--lp-muted) !important;
+    font-style: italic !important;
+    background: var(--lp-surface) !important;
+    border-radius: 0 0.35rem 0.35rem 0 !important;
+}
+
+/* Tables: enforce real table layout (not loose text columns) */
+.lesson-plan-table-wrap {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    margin: 1.15em 0 !important;
+    border: 1px solid var(--lp-border) !important;
+    border-radius: 0.375rem !important;
+    background: #fff !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+.lesson-plan-prose table,
+.lesson-plan-table-wrap table {
+    display: table !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    table-layout: fixed !important;
+    margin: 0 !important;
+    font-size: 0.92rem !important;
+    box-sizing: border-box !important;
+}
+
+.lesson-plan-prose thead,
+.lesson-plan-table-wrap thead {
+    display: table-header-group !important;
+}
+
+.lesson-plan-prose tbody,
+.lesson-plan-table-wrap tbody {
+    display: table-row-group !important;
+}
+
+.lesson-plan-prose tr,
+.lesson-plan-table-wrap tr {
+    display: table-row !important;
+}
+
+.lesson-plan-prose th,
+.lesson-plan-prose td,
+.lesson-plan-table-wrap th,
+.lesson-plan-table-wrap td {
+    display: table-cell !important;
+    border: 1px solid var(--lp-border) !important;
+    padding: 0.55rem 0.65rem !important;
+    text-align: left !important;
+    vertical-align: top !important;
+    box-sizing: border-box !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto;
+}
+
+.lesson-plan-prose th,
+.lesson-plan-table-wrap th {
+    background: #e2e8f0 !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+}
+
+.lesson-plan-prose tbody tr:nth-child(even) td,
+.lesson-plan-table-wrap tbody tr:nth-child(even) td {
+    background: #f8fafc !important;
+}
+
+.lesson-plan-prose img {
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 1em 0 !important;
+    border-radius: 0.35rem !important;
+}
+
+.lesson-plan-image-request {
+    display: block !important;
+    margin: 1.25em 0 !important;
+    padding: 0.85em 1em !important;
+    border: 2px dashed #a5b4fc !important;
+    border-radius: 0.5rem !important;
+    background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 100%) !important;
+}
+
+.lesson-plan-image-request-label {
+    display: inline-block !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: var(--lp-accent) !important;
+    margin-bottom: 0.35em !important;
+}
+
+.lesson-plan-image-request-desc {
+    margin: 0 !important;
+    font-size: 0.95rem !important;
+    color: #3730a3 !important;
+    font-style: normal !important;
+}
+
+@media print {
+    .lesson-plan-prose-wrapper {
+        max-width: none !important;
+        margin: 0 !important;
+    }
+
+    .lesson-plan-prose {
+        font-size: 11pt !important;
+        line-height: 1.5 !important;
+        color: #000 !important;
+    }
+
+    .lesson-plan-prose h2 {
+        border-left-color: #000 !important;
+        page-break-after: avoid;
+    }
+
+    .lesson-plan-prose table,
+    .lesson-plan-table-wrap {
+        page-break-inside: avoid;
+    }
+
+    .lesson-plan-image-request {
+        border-color: #999 !important;
+        background: #f5f5f5 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .lesson-plan-image-request-desc {
+        color: #333 !important;
+    }
+}

@@ -1,0 +1,1148 @@
+/*
+ * Canvas workspace shell — light and dark (html.dark).
+ * Loaded after canvas_dashboard.css. Colours come from app-tokens.css.
+ */
+
+@property --ring-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* ── Atmosphere ─────────────────────────────────────────────────────────── */
+.canvas-page-root {
+    position: relative;
+    isolation: isolate;
+    background: transparent;
+}
+
+.canvas-page-root::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(to right, rgba(16, 24, 40, 0.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(16, 24, 40, 0.045) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, black 0%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, black 0%, transparent 75%);
+}
+
+html.dark .canvas-page-root::before {
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+}
+
+.canvas-app-shell,
+.canvas-main-scroll {
+    z-index: 1;
+    background-color: transparent !important;
+}
+/* Must not override `absolute` on #canvas-chat-messages, or the chat stops scrolling */
+.canvas-app-shell,
+.canvas-main-scroll:not(.absolute) {
+    position: relative;
+}
+
+.canvas-workspace-themed {
+    --canvas-composer-accent: var(--color-accent-2);
+}
+
+.canvas-main-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--color-accent-2) 30%, var(--color-border-strong)) transparent;
+}
+
+.canvas-main-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.canvas-main-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.canvas-main-scroll::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--color-accent-2) 30%, var(--color-border-strong));
+    border-radius: 9999px;
+}
+
+/* ── Left sidebar ───────────────────────────────────────────────────────── */
+.canvas-sidebar {
+    background: transparent;
+    scrollbar-width: none;
+}
+
+.canvas-sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.canvas-sidebar-panel {
+    position: relative;
+    width: calc(100% - 0.75rem);
+    margin: 1rem 0 0.75rem 0.25rem;
+    padding: 0.75rem 0 0.75rem;
+    border-radius: 1.5rem;
+    background:
+        radial-gradient(120% 40% at 0% 0%, color-mix(in srgb, #7c5cff 10%, transparent), transparent 70%),
+        var(--card-bg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--card-highlight), var(--shadow-soft);
+    flex: 1 0 auto;
+}
+
+.canvas-sidebar-panel > nav {
+    flex: 1 0 auto;
+}
+
+.canvas-sidebar-panel > nav > * {
+    flex-shrink: 0;
+}
+
+.canvas-nav-new-chat {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    height: 2.6rem;
+    padding: 0 0.9rem;
+    border-radius: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    background-image: var(--gradient-brand);
+    background-size: 160% 100%;
+    background-position: 0% 50%;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 10px 24px -10px rgba(124, 92, 255, 0.8);
+    font-weight: 650;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-position 0.5s ease, box-shadow 0.2s ease;
+}
+
+.canvas-nav-new-chat::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.canvas-nav-new-chat:hover {
+    transform: translateY(-1px);
+    background-position: 100% 50%;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 16px 32px -12px rgba(217, 70, 239, 0.75);
+}
+
+.canvas-nav-new-chat:hover::after {
+    transform: translateX(120%);
+}
+
+.canvas-nav-new-chat:active {
+    transform: scale(0.98);
+}
+
+.canvas-nav-new-chat:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--color-ring);
+}
+
+.canvas-nav-section {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.6rem;
+    border: 1px solid transparent;
+    color: var(--color-fg-subtle);
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.canvas-nav-section:hover {
+    background: color-mix(in srgb, var(--ui-tone) 8%, transparent);
+    color: var(--color-fg);
+}
+
+.canvas-nav-section.is-open {
+    color: var(--color-fg-muted);
+}
+
+.canvas-nav-section:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--color-ring);
+}
+
+.canvas-nav-section-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background: var(--ui-tone);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--ui-tone) 18%, transparent), 0 0 10px var(--ui-tone);
+}
+
+.canvas-nav-section-label {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+    font-family: var(--font-tech);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.canvas-nav-section > svg {
+    width: 0.85rem;
+    height: 0.85rem;
+    opacity: 0.55;
+}
+
+.canvas-nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 0.25rem;
+    --ui-tone: inherit;
+}
+
+.class-tools-nav { --nav-tone: #6d5dfc; }
+.admin-tools-nav { --nav-tone: #d946ef; }
+.tools-nav { --nav-tone: #0ea5e9; }
+
+html.dark .class-tools-nav { --nav-tone: #9b8cff; }
+html.dark .admin-tools-nav { --nav-tone: #f0abfc; }
+html.dark .tools-nav { --nav-tone: #38bdf8; }
+
+.canvas-nav-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    min-height: 2.4rem;
+    padding: 0.25rem 0.5rem 0.25rem 0.3rem;
+    border-radius: 0.75rem;
+    color: var(--color-fg-muted);
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.canvas-nav-item:hover {
+    color: var(--color-fg);
+    background: color-mix(in srgb, var(--nav-tone, var(--color-accent-2)) 8%, transparent);
+    transform: translateX(2px);
+}
+
+.canvas-nav-item:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--color-ring);
+}
+
+.canvas-nav-item.is-active {
+    color: var(--color-fg);
+    background:
+        linear-gradient(90deg, color-mix(in srgb, var(--nav-tone, var(--color-accent-2)) 16%, transparent), transparent 85%);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--nav-tone, var(--color-accent-2)) 24%, transparent);
+}
+
+.canvas-nav-item.is-active::before {
+    content: "";
+    position: absolute;
+    left: -0.45rem;
+    top: 22%;
+    bottom: 22%;
+    width: 3px;
+    border-radius: 9999px;
+    background: var(--nav-tone, var(--color-accent-2));
+    box-shadow: 0 0 12px var(--nav-tone, var(--color-accent-2));
+}
+
+.canvas-nav-icon {
+    flex-shrink: 0;
+    width: 1.9rem;
+    height: 1.9rem;
+    padding: 0.42rem;
+    border-radius: 0.6rem;
+    color: color-mix(in srgb, var(--nav-tone, var(--color-accent-2)) 85%, var(--color-fg));
+    background: color-mix(in srgb, var(--nav-tone, var(--color-accent-2)) 10%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--nav-tone, var(--color-accent-2)) 20%, transparent);
+    transition: transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1), background-color 0.15s ease, color 0.15s ease, box-shadow 0.2s ease;
+}
+
+.canvas-nav-item:hover .canvas-nav-icon {
+    transform: scale(1.08);
+}
+
+.canvas-nav-item.is-active .canvas-nav-icon {
+    color: #ffffff;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--nav-tone) 80%, #ffffff), var(--nav-tone));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 6px 14px -6px var(--nav-tone);
+}
+
+html.dark .canvas-nav-item.is-active .canvas-nav-icon {
+    color: #0b0c12;
+}
+
+.canvas-nav-icon--alert {
+    --nav-tone: #ef4444;
+}
+
+.canvas-nav-label {
+    font-size: 0.8125rem;
+    font-weight: 550;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    color: inherit;
+}
+
+.canvas-nav-recent {
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.75rem;
+    color: var(--color-fg);
+    transition: background-color 0.15s ease;
+}
+
+.canvas-nav-recent:hover {
+    background: color-mix(in srgb, var(--color-accent-2) 8%, transparent);
+}
+
+.canvas-sidebar-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    background:
+        radial-gradient(90% 120% at 100% 0%, rgba(217, 70, 239, 0.55), transparent 60%),
+        radial-gradient(90% 120% at 0% 100%, rgba(79, 123, 255, 0.55), transparent 60%),
+        linear-gradient(160deg, #1a1733, #0d0e18);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 14px 30px -14px rgba(124, 92, 255, 0.8);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+
+.canvas-sidebar-card:hover {
+    transform: translateY(-1px);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), 0 18px 36px -14px rgba(217, 70, 239, 0.75);
+}
+
+.canvas-sidebar-account {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.25rem 0;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-fg-muted);
+}
+
+.canvas-sidebar-account span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.canvas-sidebar-logout {
+    display: inline-block;
+    padding: 0 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--color-fg-subtle);
+    transition: color 0.15s ease;
+}
+
+.canvas-sidebar-logout:hover {
+    color: var(--color-link);
+}
+
+/* ── Home chat: greeting + prompts ──────────────────────────────────────── */
+.canvas-greeting {
+    animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.canvas-greeting-blob {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    width: min(56rem, 90vw);
+    height: 26rem;
+    transform: translate(-50%, -30%);
+    border-radius: 9999px;
+    background: var(--gradient-orb);
+    filter: blur(48px) saturate(1.2);
+    opacity: 0.5;
+    z-index: -1;
+    pointer-events: none;
+    animation: canvas-orb-breathe 10s ease-in-out infinite;
+}
+
+html.dark .canvas-greeting-blob {
+    opacity: 0.6;
+}
+
+@keyframes canvas-orb-breathe {
+    0%, 100% { transform: translate(-50%, -30%) scale(1); filter: blur(48px) saturate(1.2) hue-rotate(0deg); }
+    50% { transform: translate(-50%, -32%) scale(1.06); filter: blur(56px) saturate(1.3) hue-rotate(-12deg); }
+}
+
+.canvas-greeting-pill {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0 auto 1.1rem;
+    padding: 0.25rem 0.85rem 0.25rem 0.25rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-surface) 70%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: var(--card-highlight), var(--shadow-soft);
+    font-size: 0.78rem;
+    font-weight: 550;
+    color: var(--color-fg-muted);
+    animation: pop-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.canvas-greeting-pill-tag {
+    padding: 0.15rem 0.6rem;
+    border-radius: 9999px;
+    background: var(--gradient-brand);
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 650;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 4px 12px -4px rgba(124, 92, 255, 0.8);
+}
+
+.canvas-greeting-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 4.4vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 1.02;
+    display: inline-block;
+    padding-bottom: 0.1em;
+    background-image: linear-gradient(105deg, var(--color-fg) 0%, var(--color-fg) 35%, #6d72ff 55%, #c026d3 75%, var(--color-fg) 100%);
+    background-size: 250% 100%;
+    background-position: 100% 50%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: canvas-title-sweep 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+html.dark .canvas-greeting-title {
+    background-image: linear-gradient(105deg, #ffffff 0%, #ffffff 35%, #a5b8ff 55%, #f0abfc 75%, #ffffff 100%);
+}
+
+@keyframes canvas-title-sweep {
+    from { background-position: 100% 50%; }
+    to { background-position: 0% 50%; }
+}
+
+.canvas-greeting-wave {
+    display: inline-block;
+}
+
+.canvas-greeting-sub {
+    margin-top: 0.6rem;
+    font-size: 1.125rem;
+    font-weight: 450;
+    letter-spacing: -0.01em;
+    color: var(--color-fg-muted);
+}
+
+.canvas-quick-prompt-chip,
+.canvas-workspace-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-surface) 72%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--color-fg);
+    font-size: 0.8rem;
+    font-weight: 550;
+    box-shadow: var(--card-highlight), var(--shadow-soft);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    animation: pop-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.canvas-workspace-chip {
+    padding: 0.55rem 1rem;
+    font-size: 0.875rem;
+}
+
+.canvas-quick-prompt-chip:nth-child(6n + 1) { --chip-tone: #4f7bff; }
+.canvas-quick-prompt-chip:nth-child(6n + 2) { --chip-tone: #7c5cff; }
+.canvas-quick-prompt-chip:nth-child(6n + 3) { --chip-tone: #d946ef; }
+.canvas-quick-prompt-chip:nth-child(6n + 4) { --chip-tone: #f43f5e; }
+.canvas-quick-prompt-chip:nth-child(6n + 5) { --chip-tone: #f59e0b; }
+.canvas-quick-prompt-chip:nth-child(6n + 6) { --chip-tone: #10b981; }
+
+.canvas-quick-prompt-chip:nth-child(2) { animation-delay: 40ms; }
+.canvas-quick-prompt-chip:nth-child(3) { animation-delay: 80ms; }
+.canvas-quick-prompt-chip:nth-child(4) { animation-delay: 120ms; }
+.canvas-quick-prompt-chip:nth-child(5) { animation-delay: 160ms; }
+.canvas-quick-prompt-chip:nth-child(6) { animation-delay: 200ms; }
+.canvas-quick-prompt-chip:nth-child(n + 7) { animation-delay: 240ms; }
+
+.canvas-quick-prompt-chip svg {
+    color: var(--chip-tone, var(--color-accent-2));
+    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--chip-tone, var(--color-accent-2)) 50%, transparent));
+}
+
+.canvas-quick-prompt-chip:hover,
+.canvas-workspace-chip:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--chip-tone, var(--color-accent-2)) 50%, var(--color-border));
+    background: color-mix(in srgb, var(--chip-tone, var(--color-accent-2)) 10%, var(--color-surface));
+    box-shadow: var(--card-highlight), 0 12px 26px -12px var(--chip-tone, var(--color-accent-2));
+}
+
+/* ── Composer ───────────────────────────────────────────────────────────── */
+.canvas-chat-composer-card {
+    position: relative;
+    border-radius: 1.5rem;
+    background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-color: var(--color-border) !important;
+    box-shadow: var(--card-highlight), 0 30px 60px -24px rgba(76, 60, 200, 0.35), 0 2px 6px rgba(16, 24, 40, 0.05);
+    transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.dark .canvas-chat-composer-card {
+    box-shadow: var(--card-highlight), 0 30px 70px -24px rgba(0, 0, 0, 0.9), 0 0 60px -20px rgba(124, 92, 255, 0.45);
+}
+
+.canvas-chat-composer-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    padding: 1px;
+    border-radius: inherit;
+    background: conic-gradient(from var(--ring-angle), #4f7bff, #7c5cff, #d946ef, #fb7185, #4f7bff);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0.35;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    animation: canvas-ring-spin 6s linear infinite;
+}
+
+.canvas-chat-composer-card:focus-within {
+    transform: translateY(-1px);
+    box-shadow: var(--card-highlight), 0 0 0 4px var(--color-ring), 0 36px 70px -24px rgba(124, 92, 255, 0.55);
+}
+
+.canvas-chat-composer-card:focus-within::before {
+    opacity: 1;
+    animation-duration: 3s;
+}
+
+@keyframes canvas-ring-spin {
+    to { --ring-angle: 360deg; }
+}
+
+.canvas-chat-composer-toolbar {
+    border-top: 1px solid var(--color-border);
+    border-radius: 0 0 1.5rem 1.5rem;
+    background: transparent;
+}
+
+.canvas-composer-tool-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.1rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-surface-2) 70%, transparent);
+    color: var(--color-fg-muted);
+    font-size: 0.75rem;
+    font-weight: 550;
+    transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.canvas-composer-tool-btn:hover {
+    color: var(--color-fg);
+    border-color: color-mix(in srgb, var(--color-accent-2) 45%, var(--color-border));
+    transform: translateY(-1px);
+}
+
+.canvas-popover {
+    background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    box-shadow: var(--card-highlight), 0 24px 50px -20px rgba(8, 12, 24, 0.45), 0 0 40px -20px rgba(124, 92, 255, 0.45);
+    animation: pop-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.canvas-popover > button,
+.canvas-popover button[role="menuitem"] {
+    border-radius: 0.6rem !important;
+    margin: 0 0.3rem;
+    width: calc(100% - 0.6rem) !important;
+}
+
+.canvas-chat-send-btn {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 9999px;
+    color: #ffffff;
+    background-image: var(--gradient-brand);
+    background-size: 160% 100%;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 8px 20px -6px rgba(124, 92, 255, 0.8);
+    transition: transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1), background-position 0.4s ease, box-shadow 0.2s ease;
+}
+
+.canvas-chat-send-btn svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.canvas-chat-send-btn:hover:not(:disabled) {
+    transform: scale(1.08);
+    background-position: 100% 50%;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 10px 28px -6px rgba(217, 70, 239, 0.8);
+}
+
+.canvas-chat-send-btn:active:not(:disabled) {
+    transform: scale(0.94);
+}
+
+.canvas-chat-send-btn:disabled {
+    background-image: none;
+    background-color: var(--color-surface-2);
+    color: var(--color-fg-subtle);
+    box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+.canvas-chat-persona-trigger {
+    border: 0;
+    color: var(--color-fg);
+    background: color-mix(in srgb, #7c5cff 10%, var(--color-surface-2));
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, #7c5cff 28%, transparent);
+    font-weight: 600;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.canvas-chat-persona-trigger svg:first-child {
+    color: #7c5cff;
+}
+
+html.dark .canvas-chat-persona-trigger svg:first-child {
+    color: #a78bfa;
+}
+
+.canvas-chat-persona-trigger:hover {
+    transform: translateY(-1px);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, #7c5cff 50%, transparent), 0 8px 18px -10px #7c5cff;
+}
+
+/* ── Messages ───────────────────────────────────────────────────────────── */
+.canvas-user-bubble {
+    display: inline-block;
+    max-width: 85%;
+    padding: 0.65rem 1.1rem;
+    border-radius: 1.25rem 1.25rem 0.35rem 1.25rem;
+    text-align: left;
+    color: #ffffff;
+    background: linear-gradient(135deg, #5b6cff, #8b5cf6 70%, #b14cf0);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 12px 28px -14px rgba(124, 92, 255, 0.85);
+    animation: pop-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.canvas-workspace-assistant-bubble {
+    border-radius: 0.35rem 1.25rem 1.25rem 1.25rem;
+    color: var(--color-fg);
+    background: var(--card-bg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--card-highlight), var(--shadow-soft);
+    animation: pop-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+html.dark .canvas-workspace-assistant-bubble .canvas-chat-html,
+html.dark .canvas-workspace-assistant-bubble .canvas-chat-html * {
+    color: inherit;
+}
+
+.canvas-chat-html a {
+    color: var(--color-link);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+    text-decoration-color: color-mix(in srgb, var(--color-link) 40%, transparent);
+}
+
+.canvas-chat-html th,
+.canvas-chat-html td {
+    border-color: var(--color-border) !important;
+}
+
+.canvas-chat-html th {
+    background: var(--color-surface-2) !important;
+}
+
+.canvas-chat-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border-strong);
+    background: var(--card-bg);
+    color: var(--color-fg);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.15s ease, box-shadow 0.2s ease;
+}
+
+.canvas-chat-pill:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--color-accent-2) 55%, var(--color-border-strong));
+    box-shadow: 0 8px 18px -10px rgba(124, 92, 255, 0.6);
+}
+
+.canvas-chat-pill--accent {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.18);
+    background: var(--gradient-brand);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 8px 20px -8px rgba(124, 92, 255, 0.8);
+}
+
+.canvas-chat-pill--accent:hover {
+    color: #ffffff;
+}
+
+.canvas-chat-sources {
+    border-top: 1px solid var(--color-border);
+    font-size: 0.75rem;
+}
+
+.canvas-chat-source-link {
+    color: var(--color-link);
+    font-weight: 600;
+}
+
+.canvas-chat-source-link:hover {
+    text-decoration: underline;
+}
+
+.canvas-workspace-themed #canvas-chat-messages .canvas-ai-icon-sparkle {
+    color: #7c5cff;
+    filter: drop-shadow(0 0 8px rgba(124, 92, 255, 0.6));
+    animation: canvas-sparkle-twinkle 3s ease-in-out infinite;
+}
+
+html.dark .canvas-workspace-themed #canvas-chat-messages .canvas-ai-icon-sparkle {
+    color: #c4b5fd;
+}
+
+@keyframes canvas-sparkle-twinkle {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.12); opacity: 0.8; }
+}
+
+.canvas-thinking {
+    font-size: 0.8rem;
+    font-weight: 550;
+    color: var(--color-fg-muted);
+}
+
+.canvas-scroll-bottom-btn {
+    padding: 0.65rem;
+    border-radius: 9999px;
+    color: var(--color-fg);
+    background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border-strong);
+    box-shadow: var(--shadow-lift);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.canvas-scroll-bottom-btn:hover {
+    transform: translateY(2px);
+}
+
+.canvas-scroll-bottom-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--color-ring);
+}
+
+/* ── Tool chrome (Exit + help) ──────────────────────────────────────────── */
+.canvas-tool-chrome-bar {
+    min-height: 3.5rem;
+    background: transparent;
+}
+
+.canvas-tool-chrome-bar.sticky {
+    background: color-mix(in srgb, var(--color-page-bg) 75%, transparent);
+    backdrop-filter: blur(18px) saturate(1.5);
+    -webkit-backdrop-filter: blur(18px) saturate(1.5);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.canvas-tool-chrome-bar--floating {
+    min-height: 0;
+}
+
+.canvas-tool-exit-btn {
+    border-radius: 9999px;
+    color: var(--color-fg);
+    background: var(--card-bg);
+    border: 1px solid var(--color-border-strong);
+    box-shadow: var(--card-highlight), var(--shadow-soft);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.15s ease, box-shadow 0.2s ease;
+}
+
+.canvas-tool-exit-btn svg {
+    color: var(--color-fg-subtle);
+    transition: transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1), color 0.15s ease;
+}
+
+.canvas-tool-exit-btn:hover,
+.canvas-tool-exit-btn:focus-visible {
+    outline: none;
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--color-accent-2) 45%, var(--color-border-strong));
+    box-shadow: var(--card-highlight), 0 10px 22px -10px rgba(124, 92, 255, 0.55);
+}
+
+.canvas-tool-exit-btn:focus-visible {
+    box-shadow: 0 0 0 4px var(--color-ring);
+}
+
+.canvas-tool-exit-btn:hover svg {
+    color: var(--color-accent-2);
+    transform: translateX(-3px);
+}
+
+.canvas-screen-help-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border-strong);
+    background: var(--card-bg);
+    color: var(--color-fg-muted);
+    box-shadow: var(--card-highlight), var(--shadow-soft);
+    transition: color 0.15s ease, border-color 0.15s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+
+.canvas-screen-help-btn:hover,
+.canvas-screen-help-btn:focus-visible {
+    outline: none;
+    color: var(--color-fg);
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--color-accent-2) 45%, var(--color-border-strong));
+    box-shadow: var(--card-highlight), 0 10px 22px -10px rgba(124, 92, 255, 0.55);
+}
+
+[data-canvas-screen-help].is-open .canvas-screen-help-btn {
+    color: #ffffff;
+    background: var(--gradient-brand);
+    border-color: transparent;
+    box-shadow: 0 8px 20px -8px rgba(124, 92, 255, 0.8);
+}
+
+.canvas-tool-chrome-bar--floating .canvas-screen-help-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: #cbd5e1;
+    box-shadow: none;
+    backdrop-filter: blur(6px);
+}
+
+.canvas-tool-chrome-bar--floating .canvas-screen-help-btn:hover,
+.canvas-tool-chrome-bar--floating .canvas-screen-help-btn:focus-visible {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #f8fafc;
+}
+
+.canvas-screen-help-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.6rem);
+    z-index: 40;
+    width: min(22rem, calc(100vw - 2rem));
+    max-height: min(70vh, 28rem);
+    overflow: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 1.25rem;
+    background:
+        radial-gradient(100% 50% at 100% 0%, color-mix(in srgb, #7c5cff 12%, transparent), transparent 70%),
+        color-mix(in srgb, var(--color-surface) 94%, transparent);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--card-highlight), 0 30px 60px -24px rgba(8, 12, 24, 0.5), 0 0 40px -20px rgba(124, 92, 255, 0.5);
+    animation: pop-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.canvas-screen-help-panel-inner {
+    padding: 1.1rem 1.2rem 1.2rem;
+}
+
+.canvas-screen-help-title {
+    margin: 0 0 0.7rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-fg);
+}
+
+.canvas-screen-help-steps {
+    margin: 0;
+    padding-left: 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: var(--color-fg-muted);
+}
+
+.canvas-screen-help-steps li::marker {
+    color: #7c5cff;
+    font-family: var(--font-tech);
+    font-weight: 600;
+}
+
+.canvas-screen-help-notes {
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.canvas-screen-help-notes-label {
+    margin: 0 0 0.4rem;
+    font-family: var(--font-tech);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #d946ef;
+}
+
+.canvas-screen-help-notes ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--color-fg-muted);
+}
+
+@media (max-width: 640px) {
+    .canvas-screen-help-panel {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: auto;
+        bottom: 0;
+        width: 100%;
+        max-height: min(70vh, 24rem);
+        border-radius: 1.25rem 1.25rem 0 0;
+    }
+}
+
+/* Class / admin tools: chrome links (Back, Close) */
+.canvas-app-shell[data-canvas-chrome-tone="class"] .canvas-chrome-link { color: #6d5dfc; }
+.canvas-app-shell[data-canvas-chrome-tone="admin"] .canvas-chrome-link { color: #c026d3; }
+.canvas-app-shell .canvas-chrome-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+html.dark .canvas-app-shell[data-canvas-chrome-tone="class"] .canvas-chrome-link { color: #b4a9ff !important; }
+html.dark .canvas-app-shell[data-canvas-chrome-tone="admin"] .canvas-chrome-link { color: #f0abfc !important; }
+
+/* ── Right rail ─────────────────────────────────────────────────────────── */
+.canvas-right-rail {
+    background: color-mix(in srgb, var(--color-surface) 70%, transparent);
+    border-left: 1px solid var(--color-border);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/* ── Enterprise info button ─────────────────────────────────────────────── */
+.canvas-enterprise-ai-info-btn {
+    color: var(--color-fg-subtle);
+}
+
+.canvas-enterprise-ai-info-btn:hover,
+.canvas-enterprise-ai-info-btn:focus-visible {
+    color: var(--color-accent-2);
+    background-color: color-mix(in srgb, var(--color-accent-2) 12%, transparent);
+}
+
+/* ── Shared tool surfaces ───────────────────────────────────────────────── */
+.canvas-wizard-step-card {
+    position: relative;
+    border-radius: 1.25rem;
+    border: 1px solid var(--color-border);
+    background: var(--card-bg);
+    box-shadow: var(--card-highlight), var(--shadow-soft);
+    animation: fade-up 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.canvas-wizard-atomas-label {
+    display: inline-block;
+    font-family: var(--font-tech);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background-image: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.canvas-wizard-shell {
+    position: relative;
+    border-radius: 1.75rem;
+    border: 1px solid var(--color-border);
+    background:
+        radial-gradient(55% 45% at 100% 0%, color-mix(in srgb, #d946ef 14%, transparent), transparent 70%),
+        radial-gradient(55% 45% at 0% 0%, color-mix(in srgb, #4f7bff 14%, transparent), transparent 70%),
+        var(--card-bg);
+    box-shadow: var(--card-highlight), var(--shadow-lift);
+    animation: canvas-wizard-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.canvas-wizard-shell::before {
+    content: "";
+    position: absolute;
+    left: 12%;
+    right: 12%;
+    top: -1px;
+    height: 2px;
+    border-radius: 9999px;
+    background: var(--gradient-brand);
+    box-shadow: 0 0 18px 1px rgba(124, 92, 255, 0.55);
+    pointer-events: none;
+}
+
+.canvas-wizard-shell::after {
+    content: "";
+    position: absolute;
+    left: -4rem;
+    right: -4rem;
+    top: -2rem;
+    height: 70%;
+    max-height: 30rem;
+    z-index: -1;
+    background:
+        radial-gradient(18% 50% at 4% 40%, rgba(79, 123, 255, 0.55), transparent 70%),
+        radial-gradient(18% 50% at 96% 35%, rgba(217, 70, 239, 0.5), transparent 70%),
+        radial-gradient(30% 30% at 50% 0%, rgba(124, 92, 255, 0.45), transparent 70%),
+        radial-gradient(20% 40% at 92% 85%, rgba(251, 113, 133, 0.35), transparent 70%);
+    filter: blur(40px);
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+html.dark .canvas-wizard-shell::after {
+    opacity: 0.6;
+}
+
+html.dark .canvas-wizard-step-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01));
+}
+
+@keyframes canvas-wizard-in {
+    from { opacity: 0; transform: translateY(12px) scale(0.99); }
+    to { opacity: 1; transform: none; }
+}
+
+.canvas-wizard-shell > .border-b:first-child .text-base,
+.canvas-wizard-shell > .border-b:first-child .text-lg {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+/* New-chat welcome fills the canvas height; Enterprise AI apps sit just above the bottom edge.
+   No overflow clipping here, or the greeting glow gets boxed to the column width. */
+.canvas-workspace-shell .canvas-empty-composer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+/* Equal auto margins above the greeting and above the apps centre the greeting + composer vertically */
+.canvas-empty-composer .canvas-greeting {
+    margin-top: auto;
+}
+.canvas-empty-composer .canvas-enterprise-ai {
+    margin-top: auto;
+    padding-top: 1.5rem;
+}
+
+/* Short viewports (Chromebooks, small laptops) */
+@media (max-height: 760px) {
+    .canvas-workspace-shell .canvas-empty-composer {
+        padding-top: 0.5rem;
+        padding-bottom: 1rem;
+    }
+    /* Scoped to the shell, not .canvas-empty-composer, so sizes don't jump while the greeting fades out on focus */
+    .canvas-workspace-shell .canvas-greeting {
+        margin-bottom: 1rem;
+    }
+    .canvas-workspace-shell .canvas-greeting-pill {
+        display: none;
+    }
+    .canvas-workspace-shell .canvas-greeting-title {
+        font-size: 2rem;
+    }
+    .canvas-workspace-shell .canvas-greeting-sub {
+        margin-top: 0.25rem;
+        font-size: 1rem;
+    }
+    .canvas-workspace-shell .canvas-quick-prompts {
+        margin-bottom: 0.75rem;
+    }
+    .canvas-workspace-shell .canvas-quick-prompts .ui-kicker {
+        display: none;
+    }
+    .canvas-workspace-shell .canvas-enterprise-ai {
+        padding-top: 0.75rem;
+        gap: 0.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .canvas-greeting,
+    .canvas-greeting-pill,
+    .canvas-greeting-blob,
+    .canvas-greeting-title,
+    .canvas-quick-prompt-chip,
+    .canvas-workspace-chip,
+    .canvas-chat-composer-card::before,
+    .canvas-user-bubble,
+    .canvas-workspace-assistant-bubble,
+    .canvas-workspace-themed #canvas-chat-messages .canvas-ai-icon-sparkle,
+    .canvas-popover,
+    .canvas-screen-help-panel,
+    .canvas-wizard-shell,
+    .canvas-wizard-step-card {
+        animation: none !important;
+    }
+}
