@@ -1080,20 +1080,21 @@ html.dark .canvas-wizard-step-card {
     letter-spacing: -0.04em;
 }
 
-/* New-chat welcome fills the canvas height; Enterprise AI apps sit just above the bottom edge.
+/* New-chat welcome fills the canvas height; Enterprise AI apps sit just below the composer.
    No overflow clipping here, or the greeting glow gets boxed to the column width. */
 .canvas-workspace-shell .canvas-empty-composer {
     display: flex;
     flex-direction: column;
     padding-top: 1rem;
 }
-/* Equal auto margins above the greeting and above the apps centre the greeting + composer vertically */
+/* Auto margins above the greeting and below the apps centre greeting + composer + apps as one group */
 .canvas-empty-composer .canvas-greeting {
     margin-top: auto;
 }
 .canvas-empty-composer .canvas-enterprise-ai {
-    margin-top: auto;
-    padding-top: 1.5rem;
+    margin-top: 1.75rem;
+    margin-bottom: auto;
+    padding-top: 0;
 }
 
 /* Short viewports (Chromebooks, small laptops) */
@@ -1123,7 +1124,7 @@ html.dark .canvas-wizard-step-card {
         display: none;
     }
     .canvas-workspace-shell .canvas-enterprise-ai {
-        padding-top: 0.75rem;
+        margin-top: 1rem;
         gap: 0.5rem;
     }
 }
