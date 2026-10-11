@@ -35,7 +35,7 @@
             '/static/js/lesson_plan_image_placeholders_controller.js?v=7'
         ],
         quiz: ['/static/js/canvas/quiz_controller.js?v=addquestionmodal1'],
-        image_creator: ['/static/js/canvas/image_creator_controller.js?v=perf1'],
+        image_creator: ['/static/js/canvas/image_creator_controller.js?v=studio2'],
         eal_lesson: ['/static/js/canvas/eal_lesson_controller.js?v=topic1'],
         online_lesson: ['/static/js/canvas/online_lesson_controller.js?v=topic1'],
         lesson_slide_creator: ['/static/js/canvas/teacher_slide_lesson_controller.js?v=topic3'],
