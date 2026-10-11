@@ -2306,6 +2306,8 @@ document.addEventListener('alpine:init', function() {
         imageCreatorTaskId: null,
         /** True when Create Images was opened from the general chat, so the user can return with the picture. */
         imageCreatorFromChat: false,
+        /** Images made in the image creator this browser session (newest first). */
+        imageCreatorGallery: [],
         /** Email canvas: null | 'draft_responses' | 'manage_todays' | 'priority_emails' | 'draft_chat' */
         emailSubMode: null,
         /** Right rail: which email tool row has its description expanded (null | same string as emailSubMode keys) */
@@ -6502,92 +6504,6 @@ document.addEventListener('alpine:init', function() {
                 el.wizardActive = false;
                 el.step = 4;
                 await submitOnlineCreateForStore(s);
-            }
-        };
-    });
-
-    Alpine.data('imageCreatorPanel', function() {
-        const store = getCanvasStore;
-        return {
-            enhanceImageCreatorPrompt() {
-                const s = getCanvasStore();
-                const prompt = (s.imageCreatorPrompt || '').trim();
-                if (!prompt) return;
-                const url = typeof imageCreatorEnhancePromptUrl !== 'undefined' && imageCreatorEnhancePromptUrl
-                    ? imageCreatorEnhancePromptUrl
-                    : '/image_creator/enhance_prompt';
-                s.imageCreatorEnhancing = true;
-                fetch(url, {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        prompt: prompt,
-                        style: s.imageCreatorStyle || 'Photorealistic',
-                        size: s.imageCreatorSize || '512'
-                    })
-                })
-                    .then(function(r) { return r.json().then(function(data) { return { ok: r.ok, data: data }; }); })
-                    .then(function(res) {
-                        s.imageCreatorEnhancing = false;
-                        if (res.ok && res.data && res.data.enhanced_prompt) {
-                            s.imageCreatorPrompt = res.data.enhanced_prompt;
-                        } else {
-                            window.alert((res.data && res.data.error) || 'Could not enhance prompt.');
-                        }
-                    })
-                    .catch(function() {
-                        s.imageCreatorEnhancing = false;
-                        window.alert('Network error while enhancing prompt.');
-                    });
-            },
-            generateImageCreator() {
-                const s = getCanvasStore();
-                const prompt = (s.imageCreatorPrompt || '').trim();
-                if (!prompt) return;
-                s.imageCreatorUsedPrompt = prompt;
-                s.imageCreatorResult = null;
-                s.imageCreatorLoading = true;
-                const formData = new FormData();
-                formData.append('prompt', prompt);
-                formData.append('style', s.imageCreatorStyle || 'Photorealistic');
-                formData.append('size', s.imageCreatorSize || '512');
-                formData.append('model', s.imageCreatorModel || 'runware:400@2');
-                fetch(imageCreatorSubmitUrl, { method: 'POST', body: formData, credentials: 'include' })
-                    .then(res => res.json().then(data => ({ status: res.status, data })))
-                    .then(({ status, data }) => {
-                        if (status === 202 && data.task_id) {
-                            s.imageCreatorTaskId = data.task_id;
-                            this.pollImageCreatorResult(data.task_id);
-                        } else {
-                            s.imageCreatorLoading = false;
-                            s.imageCreatorResult = { error: data.error || 'Failed to start image generation' };
-                        }
-                    })
-                    .catch(e => {
-                        s.imageCreatorLoading = false;
-                        s.imageCreatorResult = { error: (e && e.data && e.data.error) || (e && e.message) || 'Network error' };
-                    });
-            },
-            pollImageCreatorResult(taskId) {
-                const s = getCanvasStore();
-                fetch(imageCreatorResultBaseUrl + taskId, { credentials: 'include' })
-                    .then(r => r.json())
-                    .then(data => {
-                        if (data.status === 'PENDING') {
-                            setTimeout(() => this.pollImageCreatorResult(taskId), 1500);
-                            return;
-                        }
-                        s.imageCreatorLoading = false;
-                        if (data.status === 'SUCCESS' && data.image_url) {
-                            s.imageCreatorResult = { image_url: data.image_url, prompt: s.imageCreatorUsedPrompt || '' };
-                        }
-                        else s.imageCreatorResult = { error: data.error || 'Image generation failed' };
-                    })
-                    .catch(() => {
-                        s.imageCreatorLoading = false;
-                        s.imageCreatorResult = { error: 'An error occurred while checking the result' };
-                    });
             }
         };
     });
