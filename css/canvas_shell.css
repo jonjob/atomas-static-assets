@@ -701,6 +701,27 @@ html.dark .canvas-workspace-assistant-bubble .canvas-chat-html * {
     background: var(--color-surface-2) !important;
 }
 
+/* Chat tables reuse lesson-plan cells, which stay light (#fff / #f8fafc) while dark mode
+   forces the text to white. Paint the body with the same dark surfaces as the header. */
+html.dark .canvas-chat-html .lesson-plan-table-wrap {
+    background: var(--color-surface) !important;
+    border-color: var(--color-border) !important;
+}
+
+html.dark .canvas-chat-html .lesson-plan-table-wrap td {
+    background: var(--color-surface) !important;
+    color: var(--color-fg) !important;
+}
+
+html.dark .canvas-chat-html .lesson-plan-table-wrap th {
+    background: var(--color-surface-2) !important;
+    color: var(--color-fg) !important;
+}
+
+html.dark .canvas-chat-html .lesson-plan-table-wrap tbody tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--color-fg) 7%, var(--color-surface)) !important;
+}
+
 .canvas-chat-pill {
     display: inline-flex;
     align-items: center;
