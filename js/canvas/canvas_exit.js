@@ -1,5 +1,6 @@
 /**
- * Centralized canvas workspace exit: return to chat home via clearAction().
+ * Centralized canvas workspace exit: return to chat home via clearAction(), or to the
+ * screen that opened the tool when it was opened via canvasOpenWithReturn().
  * Listens for canvas-request-exit and legacy canvas-close-* events.
  */
 (function() {
@@ -22,9 +23,37 @@
         return Object.prototype.hasOwnProperty.call(CONFIRM_MESSAGES, action);
     }
 
+    function returnTargetFor(store) {
+        if (!store || !store.exitReturnTo) return null;
+        var actions = store.exitReturnActions || [];
+        return actions.indexOf(store.currentAction) !== -1 ? store.exitReturnTo : null;
+    }
+
+    function clearReturnTarget(store) {
+        store.exitReturnTo = null;
+        store.exitReturnActions = [];
+        store.exitReturnLabel = null;
+    }
+
+    /* Opens a tool so that exiting it (or its related sub-actions) goes back to returnTo. */
+    window.canvasOpenWithReturn = function canvasOpenWithReturn(action, returnTo, returnLabel, relatedActions) {
+        var store = getStore();
+        if (!store || typeof store.setAction !== 'function') return;
+        store.exitReturnTo = returnTo;
+        store.exitReturnActions = [action].concat(relatedActions || []);
+        store.exitReturnLabel = returnLabel || null;
+        store.setAction(action);
+    };
+
     function finishExit(detail) {
         var store = getStore();
         if (!store || typeof store.clearAction !== 'function') return;
+        var returnTo = returnTargetFor(store);
+        clearReturnTarget(store);
+        if (returnTo && !detail.thenNewChat && !detail.thenNavigate) {
+            store.setAction(returnTo);
+            return;
+        }
         store.clearAction();
         if (detail && detail.thenNewChat && typeof store.startNewChat === 'function') {
             store.startNewChat();
@@ -53,6 +82,16 @@
         }
         finishExit(detail);
     };
+
+    document.addEventListener('alpine:initialized', function() {
+        var store = getStore();
+        if (!store || typeof Alpine.effect !== 'function') return;
+        if (store.exitReturnTo === undefined) clearReturnTarget(store);
+        Alpine.effect(function() {
+            void store.currentAction;
+            if (store.exitReturnTo && !returnTargetFor(store)) clearReturnTarget(store);
+        });
+    });
 
     document.addEventListener('canvas-request-exit', function(ev) {
         window.canvasRequestExit((ev && ev.detail) || {});

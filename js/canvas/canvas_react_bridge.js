@@ -5,8 +5,8 @@
 (function() {
     'use strict';
 
-    var REACT_ACTIONS = ['notebook_agent_categories', 'persona_themes', 'sharepoint_favourites', 'alert_system'];
-    var REACT_BUNDLE_URL = '/static/canvas-ui/canvas-tools.js?v=lovable1';
+    var REACT_ACTIONS = ['admin_hub', 'notebook_agent_categories', 'persona_themes', 'sharepoint_favourites', 'alert_system', 'voip'];
+    var REACT_BUNDLE_URL = '/static/canvas-ui/canvas-tools.js?v=comms3';
     var reactBundleLoaded = false;
     var reactBundleInflight = null;
     var activeReactAction = null;

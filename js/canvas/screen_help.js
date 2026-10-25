@@ -199,9 +199,9 @@
         classroom_teams: {
             title: 'Teams Classrooms',
             steps: [
-                'See Teams classes linked to your school.',
-                'Open a class to review membership or related classroom actions.',
-                'Use your school’s Teams process if a class is missing or out of date.'
+                'Create a team for each selected class or year, or tick Create one combined team when several classes should share one Teams classroom.',
+                'A combined team, such as Y3/Y4, includes every teacher and pupil from the classes you select.',
+                'Assign staff to those classes first. A class with no teacher is skipped unless another selected class has staff.'
             ]
         },
         notebook_admin: {
@@ -267,6 +267,15 @@
                 'Choose colours and surface tints for a persona’s workspace look.',
                 'Preview the theme, then save so it applies when that persona is active.',
                 'Use Exit to return to the main workspace.'
+            ]
+        },
+        voip: {
+            title: 'AtomX Comms',
+            steps: [
+                'Alerts at the top show phone lines that are down, missed callers not yet called back, and unheard voicemail.',
+                'Call totals, busiest times and calls by extension cover the last 7 days; the callback list covers 14 days.',
+                'The screen opens with the last saved figures and updates them in the background when they are over five minutes old. Use Refresh for live figures.',
+                'If this school is not on AtomX Comms yet, the screen explains what it adds and shows a sample dashboard with made-up figures.'
             ]
         },
         sharepoint_favourites: {

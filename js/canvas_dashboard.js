@@ -541,7 +541,7 @@ document.addEventListener('alpine:init', function() {
         'notebook_app_documents',
         'notebook_trust_staff'
     ];
-    var REACT_CANVAS_ACTIONS = ['notebook_agent_categories', 'persona_themes', 'sharepoint_favourites', 'alert_system'];
+    var REACT_CANVAS_ACTIONS = ['admin_hub', 'notebook_agent_categories', 'persona_themes', 'sharepoint_favourites', 'alert_system', 'voip'];
     const sodCanvasFragmentUrlTemplate = (C.sodCanvasFragmentUrlTemplate || '/sod/canvas/SECTION_PLACEHOLDER').trim();
     const initialSodSeasonIdBoot = (C.initialSodSeasonId || '').trim();
     const initialSodSchoolIdBoot = (C.initialSodSchoolId || '').trim();
@@ -2430,6 +2430,8 @@ document.addEventListener('alpine:init', function() {
             if (a === 'notebook_app_documents') return 'Notebook — App documents';
             if (a === 'notebook_trust_staff') return 'Notebook — Trust staff';
             if (a === 'notebook_agent_categories') return 'Notebook agent categories';
+            if (a === 'admin_hub') return 'Admin';
+            if (a === 'voip') return 'AtomX Comms';
             if (a === 'persona_themes') return 'Persona themes';
             if (a === 'sharepoint_favourites') return 'SharePoint Favourites';
             if (a === 'sod_home' || a === 'sod_seasons' || a === 'sod_indicators' ||
@@ -2709,6 +2711,8 @@ document.addEventListener('alpine:init', function() {
                 action !== 'online_lesson' &&
                 action !== 'lesson_slide_creator' &&
                 action !== 'my_lessons' &&
+                action !== 'admin_hub' &&
+                action !== 'voip' &&
                 action !== 'notebook_agent_categories' &&
                 action !== 'persona_themes' &&
                 action !== 'sharepoint_favourites' &&
@@ -4125,6 +4129,7 @@ document.addEventListener('alpine:init', function() {
         image_creator: 1
     };
     var CANVAS_ADMIN_TOOL_ACTIONS = {
+        admin_hub: 1,
         email: 1,
         teams_meetings: 1,
         it_compliance: 1,
@@ -4136,6 +4141,7 @@ document.addEventListener('alpine:init', function() {
         staff_management: 1,
         classroom_teams: 1,
         inventory: 1,
+        voip: 1,
         notebook_agent_categories: 1,
         persona_themes: 1,
         sharepoint_favourites: 1

@@ -6,9 +6,6 @@
 
 .ic-studio {
     position: relative;
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow-y: auto;
     padding: 1.5rem 0.25rem 2.5rem;
     color: var(--color-fg);
     isolation: isolate;
@@ -61,6 +58,32 @@
     font-size: 0.9375rem;
     color: var(--color-fg-muted);
 }
+.ic-announce {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+    padding: 0.7rem 0.85rem;
+    border-radius: var(--radius-card);
+    background: var(--gradient-brand-soft);
+    border: 1px solid color-mix(in srgb, var(--color-primary) 22%, transparent);
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--color-fg);
+}
+.ic-announce__badge {
+    flex: none;
+    margin-top: 0.1rem;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    background: var(--card-bg);
+    border: 1px solid color-mix(in srgb, var(--color-primary) 25%, transparent);
+}
 
 /* ── Layout ── */
 .ic-layout {
@@ -70,7 +93,6 @@
 }
 @media (min-width: 1100px) {
     .ic-layout { grid-template-columns: minmax(22rem, 26rem) minmax(0, 1fr); }
-    .ic-controls { position: sticky; top: 0; }
 }
 .ic-controls { display: flex; flex-direction: column; gap: 1.1rem; }
 

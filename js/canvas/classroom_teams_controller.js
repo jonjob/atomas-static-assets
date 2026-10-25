@@ -72,6 +72,8 @@
             endDate: initEnd,
             selectedRg: [],
             selectedYears: [],
+            combineTeams: false,
+            combineName: '',
             updateYearBusy: false,
             createBusy: false,
             archiveBusy: false,
@@ -146,10 +148,25 @@
                 }
             },
 
+            canCombine: function () {
+                return (this.selectedRg.length + this.selectedYears.length) >= 2;
+            },
+
+            onCombineToggle: function () {
+                if (this.combineTeams && !String(this.combineName || '').trim()) {
+                    this.combineName = this.selectedRg.concat(this.selectedYears).join('/');
+                }
+            },
+
             startCreateTeams: async function () {
                 var self = this;
+                var combine = !!(this.combineTeams && this.canCombine());
                 if (!urls.createTeams || (!this.selectedRg.length && !this.selectedYears.length)) {
                     this.inlineError = 'Select at least one registration group or year group.';
+                    return;
+                }
+                if (combine && !String(this.combineName || '').trim()) {
+                    this.inlineError = 'Enter a name for the combined team, for example Y3/Y4.';
                     return;
                 }
                 if (!this.currentYear) {
@@ -172,7 +189,9 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             registration_groups: this.selectedRg,
-                            year_groups: this.selectedYears
+                            year_groups: this.selectedYears,
+                            combine: combine,
+                            team_name: combine ? String(this.combineName || '').trim() : ''
                         })
                     });
                     var data = await r.json().catch(function () { return {}; });
@@ -301,6 +320,8 @@
                 this.createBusy = false;
                 this.selectedRg = [];
                 this.selectedYears = [];
+                this.combineTeams = false;
+                this.combineName = '';
                 this.refresh();
             },
 
@@ -353,11 +374,17 @@
             teamKind: function (team) {
                 if (!team) return '';
                 var label = team.registration_group != null ? String(team.registration_group) : '';
+                var key = label.toLowerCase();
                 var years = this.yearGroups || [];
-                for (var i = 0; i < years.length; i++) {
-                    if (String(years[i]).toLowerCase() === label.toLowerCase()) return 'Year group';
+                var regs = this.registrationGroups || [];
+                var i;
+                for (i = 0; i < years.length; i++) {
+                    if (String(years[i]).toLowerCase() === key) return 'Year group';
                 }
-                return 'Registration group';
+                for (i = 0; i < regs.length; i++) {
+                    if (String(regs[i]).toLowerCase() === key) return 'Registration group';
+                }
+                return 'Combined class';
             },
 
             teamLabel: function (team) {
