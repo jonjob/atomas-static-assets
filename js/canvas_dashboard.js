@@ -541,7 +541,7 @@ document.addEventListener('alpine:init', function() {
         'notebook_app_documents',
         'notebook_trust_staff'
     ];
-    var REACT_CANVAS_ACTIONS = ['admin_hub', 'notebook_agent_categories', 'persona_themes', 'sharepoint_favourites', 'alert_system', 'voip'];
+    var REACT_CANVAS_ACTIONS = ['admin_hub', 'notebook_agent_categories', 'persona_themes', 'sharepoint_favourites', 'alert_system', 'voip', 'atom_notes', 'quick_pupil_picker', 'quick_timer', 'quick_dice', 'quick_groups', 'quick_tps', 'quick_noise', 'quick_traffic'];
     const sodCanvasFragmentUrlTemplate = (C.sodCanvasFragmentUrlTemplate || '/sod/canvas/SECTION_PLACEHOLDER').trim();
     const initialSodSeasonIdBoot = (C.initialSodSeasonId || '').trim();
     const initialSodSchoolIdBoot = (C.initialSodSchoolId || '').trim();
@@ -2399,6 +2399,10 @@ document.addEventListener('alpine:init', function() {
         alertCanvasFullscreen() {
             return this.currentAction === 'alert_system';
         },
+        /** SMART notebook board: hide header and rails, keep the floating Exit. */
+        atomNotesFullscreen() {
+            return this.currentAction === 'atom_notes';
+        },
         /** Title for the active tool (center shell bar and right rail). */
         currentToolTitle() {
             const a = this.currentAction;
@@ -2421,6 +2425,14 @@ document.addEventListener('alpine:init', function() {
             if (a === 'eal_lesson') return 'Create interactive EAL lesson';
             if (a === 'online_lesson') return 'Online curriculum lesson';
             if (a === 'lesson_slide_creator') return 'Lesson Slide Creator';
+            if (a === 'atom_notes') return 'Atom Notes';
+            if (a === 'quick_pupil_picker') return 'Pupil chooser';
+            if (a === 'quick_timer') return 'Timer';
+            if (a === 'quick_dice') return 'Dice';
+            if (a === 'quick_groups') return 'Group maker';
+            if (a === 'quick_tps') return 'Think, pair, share';
+            if (a === 'quick_noise') return 'Noise meter';
+            if (a === 'quick_traffic') return 'Traffic light';
             if (a === 'lesson_plan') return 'Create lesson plan';
             if (a === 'my_lessons') return 'My lessons';
             if (a === 'notebook_admin') return 'Atomas Notebook';
@@ -2710,6 +2722,14 @@ document.addEventListener('alpine:init', function() {
                 action !== 'eal_lesson' &&
                 action !== 'online_lesson' &&
                 action !== 'lesson_slide_creator' &&
+                action !== 'atom_notes' &&
+                action !== 'quick_pupil_picker' &&
+                action !== 'quick_timer' &&
+                action !== 'quick_dice' &&
+                action !== 'quick_groups' &&
+                action !== 'quick_tps' &&
+                action !== 'quick_noise' &&
+                action !== 'quick_traffic' &&
                 action !== 'my_lessons' &&
                 action !== 'admin_hub' &&
                 action !== 'voip' &&
@@ -4125,6 +4145,14 @@ document.addEventListener('alpine:init', function() {
         eal_lesson: 1,
         online_lesson: 1,
         lesson_slide_creator: 1,
+        atom_notes: 1,
+        quick_pupil_picker: 1,
+        quick_timer: 1,
+        quick_dice: 1,
+        quick_groups: 1,
+        quick_tps: 1,
+        quick_noise: 1,
+        quick_traffic: 1,
         student_work_marking: 1,
         image_creator: 1
     };

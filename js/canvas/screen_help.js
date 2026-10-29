@@ -69,6 +69,79 @@
                 'Save your work before leaving the tool.'
             ]
         },
+        atom_notes: {
+            title: 'Atom Notes',
+            steps: [
+                'Open a SMART notebook from this computer, or from OneDrive or SharePoint.',
+                'Choose a class so the name picker uses that class’s first names. Names are not saved inside the notebook file.',
+                'Present from the board. Use the pens, shade, spotlight, timer and dice as you would on a whiteboard.',
+                'Save back to OneDrive or SharePoint when you want to keep the file. Exit returns to the Atomas workspace.'
+            ]
+        },
+        quick_pupil_picker: {
+            title: 'Pupil chooser',
+            steps: [
+                'Choose a class to put its first names on the wheel, or press Type names to enter your own.',
+                'Press Spin. Everyone is picked once before anyone is picked again.',
+                'Start again begins a fresh round. Full screen shows the wheel on the board.'
+            ],
+            notes: [
+                'Typed names stay in this browser only and are shared with the Fair name picker in Lesson Slide Creator.'
+            ]
+        },
+        quick_timer: {
+            title: 'Timer',
+            steps: [
+                'Pick a preset or set minutes and seconds, then press Start.',
+                'Pause, Reset, or add time while it runs. Countdown music plays while it runs (turn it off with Music) and an alarm rings when time is up.',
+                'Use Full screen so the class can see the countdown.'
+            ]
+        },
+        quick_groups: {
+            title: 'Group maker',
+            steps: [
+                'Choose a class, or press Type names to use your own list.',
+                'Pick Groups of (pupils per group) or Number of groups, then press Make groups.',
+                'Use Who\u2019s in today? to leave out anyone who is away. Press Reshuffle for new groups.'
+            ],
+            notes: [
+                'Class names are loaded for this screen only and are never saved with the groups.'
+            ]
+        },
+        quick_tps: {
+            title: 'Think, pair, share',
+            steps: [
+                'Optionally type the question so the class can see it.',
+                'Set how long each phase lasts, then press Start. A bell rings as each phase begins.',
+                'Use Next phase to move on early, or Reset to start again.'
+            ]
+        },
+        quick_noise: {
+            title: 'Noise meter',
+            steps: [
+                'Press Start listening and allow the microphone when your browser asks.',
+                'Drag How loud is too loud? to suit the activity. The line on the bar shows the limit.',
+                'If the room stays over the limit, the face turns red and a bell rings (turn it off with Bell when too loud).'
+            ],
+            notes: [
+                'Sound is measured on this device only. Nothing is recorded or sent anywhere.'
+            ]
+        },
+        quick_traffic: {
+            title: 'Traffic light',
+            steps: [
+                'Tap a light, or press 1, 2 or 3, to show how pupils should work.',
+                'Use Change wording to fit your classroom routines. Your wording is remembered on this device.'
+            ]
+        },
+        quick_dice: {
+            title: 'Dice',
+            steps: [
+                'Choose 1 die or 2 dice, then press Roll.',
+                'With two dice the total is shown underneath.',
+                'Use Full screen so the class can see the result.'
+            ]
+        },
         lesson_slide_creator: {
             title: 'Lesson Slide Creator',
             steps: [
