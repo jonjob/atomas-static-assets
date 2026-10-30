@@ -6,7 +6,7 @@
     'use strict';
 
     var REACT_ACTIONS = ['admin_hub', 'notebook_agent_categories', 'persona_themes', 'sharepoint_favourites', 'alert_system', 'voip', 'atom_notes', 'quick_pupil_picker', 'quick_timer', 'quick_dice', 'quick_groups', 'quick_tps', 'quick_noise', 'quick_traffic'];
-    var REACT_BUNDLE_URL = '/static/canvas-ui/canvas-tools.js?v=quicktools6';
+    var REACT_BUNDLE_URL = '/static/canvas-ui/canvas-tools.js?v=notesai3';
     var reactBundleLoaded = false;
     var reactBundleInflight = null;
     var activeReactAction = null;

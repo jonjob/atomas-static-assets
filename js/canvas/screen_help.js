@@ -35,10 +35,13 @@
         quiz: {
             title: 'Create quiz',
             steps: [
-                'Upload or paste source material, or pick notebook documents if your school uses Notebook.',
-                'Choose the class context and generate the quiz.',
-                'Review questions in the canvas, then edit or add items as needed.',
-                'Use the chat panel on the right to ask for changes to this quiz.'
+                'Pick the class, year, subject and topic, then add source material if you have some.',
+                'Choose a look for the student page and press Generate quiz.',
+                'Click a question in the list to edit it. Tap a letter to mark the right answer. The student preview updates as you type.',
+                'Press Publish for pupils to create the link. After more edits, press Update student link to make them live.'
+            ],
+            notes: [
+                'Edits save automatically. If you delete a question by mistake, press Undo straight away.'
             ]
         },
         image_creator: {

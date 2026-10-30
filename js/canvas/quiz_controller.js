@@ -467,8 +467,338 @@
         question.image_alt = '';
     }
 
+    var QUIZ_TYPE_LABELS = { mc: 'Multiple choice', tf: 'True or false', fib: 'Fill the blank' };
+    var loadedTemplateFonts = {};
+
+    function ensureQuizTemplateFonts(templates) {
+        (templates || []).forEach(function(t) {
+            var href = t && t.font_link;
+            if (!href || loadedTemplateFonts[href]) return;
+            loadedTemplateFonts[href] = true;
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = href;
+            document.head.appendChild(link);
+        });
+    }
+
+    function quizQuestionContent(q) {
+        if (!q) return null;
+        return {
+            id: q.id, type: q.type, question: q.question || '', options: q.options || null,
+            correct: q.correct, answer: q.answer, hint: q.hint || '', explanation: q.explanation || '',
+            image_url: q.image_url || ''
+        };
+    }
+
+    function quizMcCorrectIndex(q) {
+        if (!q || q.type !== 'mc') return -1;
+        var c = q.correct;
+        var n = parseInt(c, 10);
+        if (!isNaN(n) && n >= 1 && n <= 4 && String(c).trim() === String(n)) return n - 1;
+        if (c !== undefined && c !== null && String(c).length) {
+            var ix = (q.options || []).findIndex(function(o) { return (o || '').trim() === String(c).trim(); });
+            if (ix >= 0) return ix;
+        }
+        return 0;
+    }
+
+    function quizQuestionIssues(q) {
+        var out = [];
+        if (!q) return out;
+        if (!(q.question || '').trim()) out.push('Add the question text');
+        if (q.type === 'mc') {
+            var opts = (q.options || []).filter(function(o) { return (o || '').trim(); });
+            if (opts.length < 2) out.push('Add at least two answers');
+            var ci = quizMcCorrectIndex(q);
+            if (!((q.options || [])[ci] || '').trim()) out.push('Pick a correct answer that has text');
+        } else if (q.type === 'fib') {
+            if (!String(q.answer == null ? '' : q.answer).trim()) out.push('Add the missing word or answer');
+        }
+        return out;
+    }
+
+    function stripCacheBuster(url) {
+        if (!url) return '';
+        return String(url).replace(/([?&])t=\d+(&|$)/, function(m, pre, post) { return post ? pre : ''; }).replace(/[?&]$/, '');
+    }
+
+    function quizEditorUiFactory() {
+        var store = function() { return Alpine.store('canvas'); };
+        var cfg = readQuizBootConfig();
+        return {
+            selectedId: null,
+            saveState: 'saved',
+            lastSavedSig: '',
+            publishedSig: '',
+            saveTimer: null,
+            saveQueued: false,
+            designOpen: false,
+            linkCopied: false,
+            undo: null,
+            undoTimer: null,
+            imageOpen: false,
+
+            init() {
+                var self = this;
+                this.resetBaseline();
+                this.$watch('draftSig', function(sig) { self.onDraftChanged(sig); });
+                this.$watch('$store.canvas.quiz.quizId', function() { self.resetBaseline(); });
+            },
+
+            destroy() {
+                clearTimeout(this.saveTimer);
+                clearTimeout(this.undoTimer);
+            },
+
+            resetBaseline() {
+                var sig = this.draftSig;
+                this.lastSavedSig = sig;
+                this.publishedSig = this.qz && this.qz.quizPublicUrl ? sig : '';
+                this.saveState = 'saved';
+                var first = this.questions[0];
+                this.selectedId = first ? first.id : null;
+                this.undo = null;
+            },
+
+            get qz() { return store().quiz || {}; },
+            get questions() { return Array.isArray(this.qz.questions) ? this.qz.questions : []; },
+            get templates() { return Array.isArray(cfg.quizHtmlTemplates) ? cfg.quizHtmlTemplates : []; },
+
+            get draftSig() {
+                var qz = this.qz;
+                return JSON.stringify({
+                    t: qz.htmlTemplateId || 'classic',
+                    q: this.questions.map(quizQuestionContent)
+                });
+            },
+
+            get selectedIndex() {
+                var qs = this.questions;
+                if (!qs.length) return -1;
+                var id = this.selectedId;
+                var ix = qs.findIndex(function(q) { return q && q.id === id; });
+                return ix >= 0 ? ix : 0;
+            },
+            get selected() {
+                var i = this.selectedIndex;
+                return i >= 0 ? this.questions[i] : null;
+            },
+            select(i) {
+                var q = this.questions[i];
+                if (!q) return;
+                this.selectedId = q.id;
+                this.imageOpen = !!(q.image_url || q.image_prompt);
+            },
+            selectNext(dir) {
+                var i = this.selectedIndex + dir;
+                if (i >= 0 && i < this.questions.length) this.select(i);
+            },
+
+            typeLabel(t) { return QUIZ_TYPE_LABELS[t] || 'Question'; },
+            issues(q) { return quizQuestionIssues(q); },
+            totalIssues() {
+                var self = this;
+                return this.questions.reduce(function(n, q) { return n + (self.issues(q).length ? 1 : 0); }, 0);
+            },
+
+            onDraftChanged(sig) {
+                if (!this.qz.quizId) return;
+                if (sig === this.lastSavedSig) {
+                    if (this.saveState !== 'saving') this.saveState = 'saved';
+                    return;
+                }
+                if (this.saveState !== 'saving') this.saveState = 'dirty';
+                var self = this;
+                clearTimeout(this.saveTimer);
+                this.saveTimer = setTimeout(function() { self.saveNow(); }, 900);
+            },
+
+            async saveNow() {
+                clearTimeout(this.saveTimer);
+                var s = store();
+                if (!s.quiz || !s.quiz.quizId) return;
+                if (s.quiz.quizSaveLoading) {
+                    this.saveQueued = true;
+                    return;
+                }
+                var sig = this.draftSig;
+                if (sig === this.lastSavedSig) {
+                    this.saveState = 'saved';
+                    return;
+                }
+                this.saveState = 'saving';
+                await s.saveCanvasQuiz();
+                if (s.quiz.error) {
+                    this.saveState = 'error';
+                    return;
+                }
+                this.lastSavedSig = sig;
+                var again = this.saveQueued || this.draftSig !== sig;
+                this.saveQueued = false;
+                this.saveState = again ? 'dirty' : 'saved';
+                if (again) {
+                    var self = this;
+                    this.saveTimer = setTimeout(function() { self.saveNow(); }, 300);
+                }
+            },
+
+            get isPublished() { return !!this.qz.quizPublicUrl; },
+            get publishOutOfDate() { return this.isPublished && this.draftSig !== this.publishedSig; },
+            get studentLink() { return stripCacheBuster(this.qz.quizPublicUrl); },
+
+            async publish() {
+                var s = store();
+                clearTimeout(this.saveTimer);
+                var sig = this.draftSig;
+                this.saveState = 'saving';
+                await s.regenerateQuizHtmlCanvas();
+                if (s.quiz.error) {
+                    this.saveState = 'error';
+                    return;
+                }
+                this.lastSavedSig = sig;
+                this.publishedSig = sig;
+                this.saveState = this.draftSig === sig ? 'saved' : 'dirty';
+                if (this.saveState === 'dirty') this.onDraftChanged(this.draftSig);
+            },
+
+            copyLink() {
+                var url = this.studentLink;
+                if (!url) return;
+                var self = this;
+                var done = function() {
+                    self.linkCopied = true;
+                    setTimeout(function() { self.linkCopied = false; }, 1800);
+                };
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(url).then(done, function() { window.prompt('Copy this link:', url); });
+                } else {
+                    window.prompt('Copy this link:', url);
+                }
+            },
+
+            get previewSrc() {
+                var qz = this.qz;
+                var tpl = cfg.quizPreviewUrlTemplate;
+                if (!qz.quizId || !tpl) return '';
+                var base = tpl.replace('__QUIZ_ID__', encodeURIComponent(String(qz.quizId)));
+                var sep = base.indexOf('?') >= 0 ? '&' : '?';
+                var src = base + sep + 'template_id=' + encodeURIComponent(qz.htmlTemplateId || 'classic') +
+                    '&t=' + (qz.quizPreviewNonce || 0);
+                var sel = this.selected;
+                return sel && sel.id ? src + '#' + encodeURIComponent(String(sel.id)) : src;
+            },
+
+            addOfType(type) {
+                var q = defaultQuizQuestion();
+                q.type = type || 'mc';
+                q = normalizeQuestionForEditor(q);
+                var qs = ensureQuizQuestionsArray(store());
+                var at = this.selectedIndex >= 0 ? this.selectedIndex + 1 : qs.length;
+                qs.splice(at, 0, q);
+                this.selectedId = q.id;
+                this.imageOpen = false;
+                closeAddQuestionChoice(store());
+                this.$nextTick(function() {
+                    var el = document.getElementById('quiz-editor-question-text');
+                    if (el) el.focus();
+                });
+            },
+
+            async addFromSource() {
+                var before = this.questions.length;
+                await generateQuizQuestionFromSource(store());
+                var qs = this.questions;
+                if (qs.length > before) this.select(qs.length - 1);
+            },
+
+            duplicate(i) {
+                var qs = this.questions;
+                var src = qs[i];
+                if (!src) return;
+                var copy = normalizeQuestionForEditor(JSON.parse(JSON.stringify(quizQuestionContent(src))));
+                copy.id = defaultQuizQuestion().id;
+                copy.image_alt = src.image_alt || '';
+                copy.image_prompt = src.image_prompt || '';
+                qs.splice(i + 1, 0, copy);
+                this.selectedId = copy.id;
+            },
+
+            move(i, dir) {
+                moveQuizQuestion(store(), i, dir);
+            },
+
+            remove(i) {
+                var qs = this.questions;
+                var q = qs[i];
+                if (!q) return;
+                qs.splice(i, 1);
+                var next = qs[Math.min(i, qs.length - 1)];
+                this.selectedId = next ? next.id : null;
+                var self = this;
+                clearTimeout(this.undoTimer);
+                this.undo = { q: q, idx: i };
+                this.undoTimer = setTimeout(function() { self.undo = null; }, 7000);
+            },
+
+            undoRemove() {
+                if (!this.undo) return;
+                var qs = ensureQuizQuestionsArray(store());
+                qs.splice(Math.min(this.undo.idx, qs.length), 0, this.undo.q);
+                this.selectedId = this.undo.q.id;
+                this.undo = null;
+                clearTimeout(this.undoTimer);
+            },
+
+            setType(q, type) {
+                if (!q || q.type === type) return;
+                q.type = type;
+                var normalized = normalizeQuestionForEditor(q);
+                Object.keys(normalized).forEach(function(k) { q[k] = normalized[k]; });
+            },
+
+            generateImage(q) { return generateQuizQuestionImage(store(), q); },
+            enhanceImagePrompt(q) { return enhanceQuizQuestionImagePrompt(store(), q); },
+            clearImage(q) { clearQuizQuestionImage(q); },
+            uploadImage(ev) {
+                var file = ev && ev.target && ev.target.files && ev.target.files[0];
+                if (ev && ev.target) ev.target.value = '';
+                var q = this.selected;
+                if (!file || !q) return;
+                return uploadQuizQuestionImage(store(), q, file);
+            },
+
+            mcCorrectIndex(q) { return quizMcCorrectIndex(q); },
+            setMcCorrect(q, i) { if (q) q.correct = i + 1; },
+            tfAnswer(q) { return q && (q.answer === true || q.answer === 'true'); },
+
+            templateById(id) {
+                var key = String(id || 'classic');
+                return this.templates.find(function(t) { return t && t.id === key; }) || this.templates[0] || null;
+            },
+            get currentTemplate() { return this.templateById(this.qz.htmlTemplateId); },
+            chooseTemplate(id) {
+                this.qz.htmlTemplateId = id;
+                this.designOpen = false;
+            },
+            loadTemplateFonts() { ensureQuizTemplateFonts(this.templates); }
+        };
+    }
+
+    if (typeof window.canvasRegisterDeferredAlpineData === 'function') {
+        window.canvasRegisterDeferredAlpineData('quizEditorUi', quizEditorUiFactory);
+    } else if (typeof Alpine !== 'undefined' && typeof Alpine.data === 'function') {
+        Alpine.data('quizEditorUi', quizEditorUiFactory);
+    } else {
+        document.addEventListener('alpine:init', function() {
+            Alpine.data('quizEditorUi', quizEditorUiFactory);
+        });
+    }
+
     window.CanvasFeatures = window.CanvasFeatures || {};
     window.CanvasFeatures.quiz = {
+        ensureQuizTemplateFonts: ensureQuizTemplateFonts,
         initialQuiz: initialQuiz,
         initialQuizExport: initialQuizExport,
         initQuizWizard: initQuizWizard,
