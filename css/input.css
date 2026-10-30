@@ -392,6 +392,33 @@
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ui-tone, var(--color-accent-2)) 28%, transparent);
   }
 
+  .ui-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-fg-muted);
+    transition: transform 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .ui-chip:hover {
+    color: var(--color-fg);
+    border-color: var(--color-border-strong);
+    transform: translateY(-1px);
+  }
+
+  .ui-chip.is-active {
+    color: #ffffff;
+    border-color: transparent;
+    background: var(--gradient-brand);
+    box-shadow: var(--shadow-glow);
+  }
+
   .ui-tone-orange { --ui-tone: #4f7bff; }
   .ui-tone-pink { --ui-tone: #d946ef; }
   .ui-tone-violet { --ui-tone: #7c3aed; }

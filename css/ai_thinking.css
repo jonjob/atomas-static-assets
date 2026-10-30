@@ -247,6 +247,59 @@ html.dark .ai-think__line {
     animation: ai-think-flow 3s ease-in-out infinite;
 }
 
+/* ── Skeleton "quiz being written" ── */
+.ai-think__quiz .ai-think__line:nth-child(2) { width: 82%; }
+.ai-think__options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem;
+    margin-top: 0.25rem;
+}
+.ai-think__option {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: 0.7rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    animation: ai-think-option 4s ease-in-out infinite;
+}
+.ai-think__option:nth-child(2) { animation-delay: 0.6s; }
+.ai-think__option:nth-child(3) { animation-delay: 1.2s; }
+.ai-think__option:nth-child(4) { animation-delay: 1.8s; }
+.ai-think__option-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.15rem;
+    height: 1.15rem;
+    flex-shrink: 0;
+    border-radius: 999px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--gradient-brand);
+}
+.ai-think__option-bar {
+    flex: 1;
+    height: 0.4rem;
+    border-radius: 999px;
+    background: var(--gradient-brand-soft);
+}
+.ai-think__option:nth-child(2) .ai-think__option-dot {
+    animation: ai-think-correct 4s ease-in-out infinite;
+}
+@keyframes ai-think-option {
+    0%, 100% { transform: none; box-shadow: none; }
+    12%      { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 16px -8px rgba(124, 92, 255, 0.7); }
+    24%      { transform: none; box-shadow: none; }
+}
+@keyframes ai-think-correct {
+    0%, 55%, 100% { background: var(--gradient-brand); }
+    65%, 90%      { background: #12a594; box-shadow: 0 0 0 4px rgba(18, 165, 148, 0.2); }
+}
+
 /* ── Progress + caption ── */
 .ai-think__progress {
     width: min(100%, 22rem);
